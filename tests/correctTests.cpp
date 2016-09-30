@@ -556,6 +556,57 @@ TEST_F(MatrixTest, LU_2x2)
  // ASSERT_FALSE(areNotEqualsU);
 }
 
+TEST_F(MatrixTest, convolution)
+{
+  const Matrix<float, 5, 5> A =
+  { 9,  9,  9,  9,  9,
+   18, 18, 18, 27, 27,
+    9,  9,  9,  9,  9,
+    9,  9,  9,  9,  9,
+    9,  9,  9,  9,  9};
+
+  Matrix<float, 3, 3> kernel =
+  {1/9, 1/9, 1/9,
+   1/9, 1/9, 1/9,
+   1/9, 1/9, 1/9 };
+
+  const Matrix<float, 5, 5> expected_after_conv =
+ { 0,  0,  0,  0, 0,
+   0, 12, 13, 14, 0,
+   0, 12, 13, 14, 0,
+   0,  9,  9,  9, 0,
+   0,  0,  0,  0, 0};
+
+  auto after_conv = conv2(A,kernel);
+
+  auto areEquals = compare(expected_after_conv, after_conv, 0.0001f);
+  ASSERT_TRUE(areEquals);
+
+  const Matrix<float, 5, 5> B =
+ { 5, 5, 5, 5, 5,
+   5, 5, 5, 5, 5,
+   5, 5, 5, 9, 5,
+   5, 5, 5, 5, 5,
+   5, 5, 5, 5, 5 };
+
+  Matrix<float, 3, 3> kernel_highpass =
+  {-1, -1, -1,
+   -1,  9, -1,
+   -1, -1, -1 };
+
+  const Matrix<float, 5, 5> expected_after_highpass =
+  { 0, 0, 0,  0, 0,
+    0, 5, 1,  1, 0,
+    0, 5, 1, 41, 0,
+    0, 5, 1,  1, 0,
+    0, 0, 0,  0, 0};
+
+  auto after_highpass = conv2(B,kernel_highpass);
+
+  auto areEqualsHighpass = compare(expected_after_highpass, after_highpass, 0.0001f);
+  ASSERT_TRUE(areEqualsHighpass);
+}
+
 int main(int argc, char* argv[])
 {
   //int i = 4;
