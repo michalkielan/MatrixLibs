@@ -614,6 +614,36 @@ Matrix<T, 2, 2> inv(const Matrix<T, 2, 2>& A)
 
 
 /**
+ * \brief Inverse of matrix 3x3
+ *
+ * \param [in] Square Matrix A with 3x3 size
+ * 
+ * \return Inverse of matrix A
+ *         error with the A is zero
+ */
+template<typename T>
+Matrix<T, 3, 3> inv(const Matrix<T, 3, 3>& A)
+{
+  auto detA = det(A);
+  if (detA == 0)
+  {
+    throw;
+  }
+
+  auto&& a = A[0][0]; auto&& b = A[0][1]; auto&& c = A[0][2];
+  auto&& d = A[1][0]; auto&& e = A[1][1]; auto&& f = A[1][2];
+  auto&& g = A[2][0]; auto&& h = A[2][1]; auto&& i = A[2][2];
+
+  Matrix<T, 3, 3> invA 
+  { e*i - f*h, c*h - b*i, b*f - c*e,
+    f*g - d*i, a*i - c*g, c*d - a*f,
+    d*h - e*g, b*g - a*h, a*e - b*d };
+
+  return invA / detA; 
+}
+
+
+/**
  * \brief Inverse of matrix nxn
  *
  * \param [in] Square Matrix A with nxn size
@@ -624,7 +654,7 @@ template<typename T, std::size_t n>
 Matrix<T, n, n> inv(const Matrix<T, n, n>& A)
 {
   Matrix<T, n, n> invA{};
-  auto detA = det(A);
+  const auto detA = det(A);
   for(std::size_t i = 0; i < n; i++)
   {
     for(std::size_t j = 0; j < n; j++)
@@ -632,8 +662,7 @@ Matrix<T, n, n> inv(const Matrix<T, n, n>& A)
       invA[i][j] = (((i+j) % 2) ? 1 : -1) * det(getminor(A,i,j));
     }
   }
-  invA = trans(invA) / detA;
-  return invA;
+  return trans(invA)/ detA;
 }
 
 

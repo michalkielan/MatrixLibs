@@ -56,6 +56,7 @@ CXXFLAGS+=$(OPTIMIZATION)
 
 LDFLAGS+=-lgtest
 LDFLAGS+=-pthread
+LDFLAGS+=-flto
 
 all:
 	 $(CXX) $(CFLAGS) -I $(INC) $(SRC)$(CORRECT_TEST).cpp -o $(CORRECT_TEST) $(LDFLAGS)
