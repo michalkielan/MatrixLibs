@@ -1,16 +1,49 @@
-CXX=g++
+#############################################################
+#  Setup variable section                                   #
+#############################################################
 
-CXXFLAGS=
+# Compiler
+COMPILER=g++
 
+# C++ standard, ex. c++0x, c++11, c++14
+CPP_STD= -std=c++14
+
+# Optimization, ex. O3, O2
 OPTIMIZATION=
 
-CPPSTANDARD=c++14
+# targets name
+TARGETS=
 
-CPPFLAGS=-Wall -g -flto
+# Linker flags variable
+LDFLAGS=
 
-INC=.
+# C, C++ flags
+CFLAGS=
 
-SRC_PATH=./tests/
+# debug flag
+DBG= -g
+
+# include path
+INC=
+SRC=
+
+
+##############################################################
+# Make file commands section                                 #
+##############################################################
+
+if[${CXX?}=""]; then CXX=$(COMPILER); fi;
+
+
+CFLAGS+=$(CPP_STD)
+CFLAGS+=-Wall 
+CFLAGS+=-flto
+CFLAGS+=$(DBG)
+CFLAGS+=$(OPTIMIZATION)
+
+INC+=.
+SRC+=./tests/
+
 CORRECT_TEST=correctTests
 PERF_TEST=performanceTests
 
@@ -21,10 +54,11 @@ CXXFLAGS+=-std=$(CPPSTANDARD)
 CXXFLAGS+=$(CPPFLAGS)
 CXXFLAGS+=$(OPTIMIZATION)
 
-LFLAGS=-lgtest
+LDFLAGS+=-lgtest
 
 all:
-	 $(CXX) $(CXXFLAGS) -I $(INC) $(SRC_PATH)$(CORRECT_TEST).cpp -o $(CORRECT_TEST) $(LFLAGS)
-	 $(CXX) ${CXXFLAGS} -I $(INC) $(SRC_PATH)$(PERF_TEST).cpp -o $(PERF_TEST) $(LFLAGS)
+	 $(CXX) $(CFLAGS) -I $(INC) $(SRC)$(CORRECT_TEST).cpp -o $(CORRECT_TEST) $(LDFLAGS)
+	 $(CXX) ${CFLAGS} -I $(INC) $(SRC)$(PERF_TEST).cpp -o $(PERF_TEST) $(LDFLAGS)
+
 clean:
-	rm -rf $(TARGETS)
+	rm -rf $(TARGETS) *.o

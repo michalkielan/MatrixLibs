@@ -1,0 +1,31 @@
+sudo: required
+
+language: cpp
+compiler:
+    - gcc
+
+install:
+    - if [ "$CXX" = "g++" ]; then export CXX="g++-5"; fi
+
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - gcc-5
+            - g++-5
+            - libgtest-dev
+
+        coverity_scan:
+            name: MatrixLibs
+            version: 1.0
+            description: matrix library
+            notification_email: michalkielan6@gmail.com
+
+
+before_script:
+    - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
+
+script: make all
+
+branch_pattern: master
