@@ -26,6 +26,8 @@ addons:
 before_script:
     - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 
-script: make -j`nproc`
+script: 
+    - make -j`nproc`
+    - ./correctTests
 
 branch_pattern: master
