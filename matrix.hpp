@@ -112,7 +112,7 @@ Matrix<T, n, n> eye(T data = 1)
  * \return Result of sum matrix A and B
  */
 template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> sum(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
+static Matrix<T, i, j> sum(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
 {
   Matrix<T, i, j> sum{};
 
@@ -136,7 +136,7 @@ Matrix<T, i, j> sum(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
  * \return Result of sum each element of A matrix and scalar data
  */
 template<typename T, std::size_t i, std::size_t j>
-Matrix<T, i, j> sum(const Matrix<T, i, j>& A, T& scalar)
+static Matrix<T, i, j> sum(const Matrix<T, i, j>& A, const T scalar)
 {
   Matrix<T, i, j> sum{};
 
@@ -160,7 +160,7 @@ Matrix<T, i, j> sum(const Matrix<T, i, j>& A, T& scalar)
  * \return Result of substraction matrix A and B
  */
 template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> sub(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
+static Matrix<T, i, j> sub(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
 {
   Matrix<T, i, j> sub{};
 
@@ -184,7 +184,7 @@ Matrix<T, i, j> sub(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
  * \return Result of substraction each element of A matrix and scalar data
  */
 template<typename T, std::size_t i, std::size_t j>
-Matrix<T, i, j> sub(const Matrix<T, i, j>& A, T& scalar)
+static Matrix<T, i, j> sub(const Matrix<T, i, j>& A, const T scalar)
 {
   Matrix<T, i, j> sub{};
 
@@ -210,7 +210,7 @@ Matrix<T, i, j> sub(const Matrix<T, i, j>& A, T& scalar)
  * \return Result of multiplication matrix A and B
  */
 template<typename T,  std::size_t n, std::size_t m, std::size_t p>
-Matrix<T, n, p> mult(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
+static Matrix<T, n, p> mult(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
 {
   auto prod = zeros<T, n, p>();
 
@@ -237,7 +237,7 @@ Matrix<T, n, p> mult(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
  * \return Result of multiplication each element of A matrix and scalar data
  */
 template<typename T, std::size_t i, std::size_t j>
-Matrix<T, i, j> mult(const Matrix<T, i, j>& A, T& scalar)
+static Matrix<T, i, j> mult(const Matrix<T, i, j>& A, const T scalar)
 {
   Matrix<T, i, j> prod{};
 
@@ -261,7 +261,7 @@ Matrix<T, i, j> mult(const Matrix<T, i, j>& A, T& scalar)
  * \return Result of divide each element of A matrix and scalar data
  */
 template<typename T, std::size_t n, std::size_t m>
-Matrix<T, n, m> div(const Matrix<T, n, m>& A, T& scalar)
+static Matrix<T, n, m> div(const Matrix<T, n, m>& A, const T scalar)
 {
   if(scalar == 0)
     throw;
@@ -276,6 +276,141 @@ Matrix<T, n, m> div(const Matrix<T, n, m>& A, T& scalar)
     }
   }
   return prod;
+}
+
+
+/**
+ * \brief Overloaded '+' operator of sum two matrices
+ *
+ * \param [in] Matrix A ixj
+ * \param [in] Matrix B ixj
+ * 
+ * \return Result of sum matrix A and B
+ */
+template<typename T, std::size_t i, std::size_t j>
+Matrix<T, i, j> operator+(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
+{
+	return sum(A, B);
+}
+
+
+/**
+ * \brief Overloaded '+' operator for add matrix and scalar
+ *
+ * \param [in] Matrix A ixj
+ * \param [in] Scalar data
+ * 
+ * \return Result of sum matrix A and scalar
+ */
+template<typename T,  std::size_t i, std::size_t j>
+Matrix<T, i, j> operator+(const Matrix<T, i, j>& A, const T scalar)
+{
+  return sum(A, scalar);
+}
+
+
+/**
+ * \brief Overloaded '+' operator for add scalar and matrix
+ *
+ * \param [in] Scalar data
+ * \param [in] Matrix A ixj
+ * 
+ * \return Result of sum scalar and matrix A
+ */
+template<typename T,  std::size_t i, std::size_t j>
+Matrix<T, i, j> operator+(const T scalar, const Matrix<T, i, j>& A)
+{
+  return sum(A, scalar);
+}
+
+
+/**
+ * \brief Overloaded '-' operator for substraction two matrices
+ *
+ * \param [in] Matrix A ixj
+ * \param [in] Matrix B ixj
+ * 
+ * \return Result of substraction matrix A and B
+ */
+template<typename T, std::size_t i, std::size_t j>
+Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
+{
+	return sub(A, B);
+}
+
+
+/**
+ * \brief Overloaded '-' operator for substraction matrix and scalar
+ *
+ * \param [in] Matrix A ixj
+ * \param [in] Scalar data
+ * 
+ * \return Result of substraction matrix A and scalar data
+ */
+template<typename T,  std::size_t i, std::size_t j>
+Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const T scalar)
+{
+  return sub(A, scalar);
+}
+
+
+/**
+ * \brief Overloaded '*' operator for multiply two matrices
+ *
+ * \param [in] Matrix A
+ * \param [in] Matrix B
+ * 
+ * \return Result of multiplication matrix A and B
+ */
+template<typename T,  std::size_t n, std::size_t m, std::size_t p>
+Matrix<T, n, p> operator*(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
+{
+	return mult(A, B);
+}
+
+
+/**
+ * \brief Overloaded '*' operator for multiply matrix and scalar
+ *
+ * \param [in] Matrix A ixj
+ * \param [in] Scalar data
+ * 
+ * \return Result of substraction matrix A and scalar
+ */
+template<typename T,  std::size_t i, std::size_t j>
+Matrix<T, i, j> operator*(const Matrix<T, i, j>& A, const T scalar)
+{
+  return mult(A, scalar);
+}
+
+
+/**
+ * \brief Overloaded '*' operator for multiply scalar and matrix
+ *
+ * \param [in] Scalar data
+ * \param [in] Matrix A ixj
+ * 
+ * \return Result of substraction scalar and matrix A
+ */
+template<typename T,  std::size_t i, std::size_t j>
+Matrix<T, i, j> operator*(const T scalar, const Matrix<T, i, j>& A)
+{
+  return mult(A, scalar);
+}
+
+
+/**
+ * \brief Overloaded '/' operator for divide matrix and scalar
+ *
+ * \param [in] Matrix A ixj
+ * \param [in] Scalar data
+ *
+ * \retirn Result of divide matrix A and scalar
+ */
+template<typename T,  std::size_t i, std::size_t j>
+Matrix<T, i, j> operator/(const Matrix<T, i, j>& A, T scalar)
+{
+  return div(A, scalar);
 }
 
 
@@ -587,157 +722,6 @@ Matrix<T, i, j> abs(const Matrix<T, i, j>& A)
 
 
 /**
- * \brief Overloaded '+' operator of sum two matrices
- *
- * \param [in] Matrix A ixj
- * \param [in] Matrix B ixj
- * 
- * \return Result of sum matrix A and B
- */
-template<typename T, std::size_t i, std::size_t j>
-Matrix<T, i, j> operator+(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
-{
-	return sum(A, B);
-}
-
-
-/**
- * \brief Overloaded '+' operator for add matrix and scalar
- *
- * \param [in] Matrix A ixj
- * \param [in] Scalar data
- * 
- * \return Result of sum matrix A and scalar
- */
-template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> operator+(const Matrix<T, i, j>& A, T scalar)
-{
-  return sum(A, scalar);
-}
-
-
-/**
- * \brief Overloaded '+' operator for add scalar and matrix
- *
- * \param [in] Scalar data
- * \param [in] Matrix A ixj
- * 
- * \return Result of sum scalar and matrix A
- */
-template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> operator+(T scalar, const Matrix<T, i, j>& A)
-{
-  return sum(A, scalar);
-}
-
-
-/**
- * \brief Overloaded '-' operator for substraction two matrices
- *
- * \param [in] Matrix A ixj
- * \param [in] Matrix B ixj
- * 
- * \return Result of substraction matrix A and B
- */
-template<typename T, std::size_t i, std::size_t j>
-Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
-{
-	return sub(A, B);
-}
-
-
-/**
- * \brief Overloaded '-' operator for substraction matrix and scalar
- *
- * \param [in] Matrix A ixj
- * \param [in] Scalar data
- * 
- * \return Result of substraction matrix A and scalar data
- */
-template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, T scalar)
-{
-  return sub(A, scalar);
-}
-
-
-/**
- * \brief Overloaded '*' operator for multiply two matrices
- *
- * \param [in] Matrix A
- * \param [in] Matrix B
- * 
- * \return Result of multiplication matrix A and B
- */
-template<typename T,  std::size_t n, std::size_t m, std::size_t p>
-Matrix<T, n, p> operator*(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
-{
-	return mult(A, B);
-}
-
-
-/**
- * \brief Overloaded '*' operator for multiply matrix and scalar
- *
- * \param [in] Matrix A ixj
- * \param [in] Scalar data
- * 
- * \return Result of substraction matrix A and scalar
- */
-template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> operator*(const Matrix<T, i, j>& A, T scalar)
-{
-  return mult(A, scalar);
-}
-
-
-/**
- * \brief Overloaded '*' operator for multiply scalar and matrix
- *
- * \param [in] Scalar data
- * \param [in] Matrix A ixj
- * 
- * \return Result of substraction scalar and matrix A
- */
-template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> operator*(T scalar, const Matrix<T, i, j>& A)
-{
-  return mult(A, scalar);
-}
-
-
-/**
- * \brief Overloaded '/' operator for divide matrix and scalar
- *
- * \param [in] Matrix A ixj
- * \param [in] Scalar data
- *
- * \retirn Result of divide matrix A and scalar
- */
-template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> operator/(const Matrix<T, i, j>& A, T scalar)
-{
-  return div(A, scalar);
-}
-
-
-/**
- * \brief Compare two matrices with the same size with specific error
- *
- * Usage: Check if two matrices are equal taking care about epsilon value
- *
- * \param [in] Matrix A ixj
- * \param [in] Matrix B ixj
- * \ Overloaded '/=' operator for divide matrix and scalar
- */
-template<typename T,  std::size_t i, std::size_t j>
-Matrix<T, i, j> operator/=(Matrix<T, i, j> A, T scalar)
-{
-  return div(A, scalar);
-}
-
-
-/**
  * \ Compare two matrices with the same size, specific error
  * \param [in] Matrix A ixj
  * \param [in] Matrix B ixj
@@ -781,26 +765,34 @@ Matrix<T, 2, 2> strassen(const Matrix<T, 2, 2>& A, const Matrix<T, 2, 2>& B)
 
   return prod;
 }
-// This implementation neglegts borders
+
+/**
+ * \brief
+ *
+ * \param [in] Matrix A ixj
+ * \param [in] Matrix V ixj
+ *
+ * \return 
+ */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
 {
   Matrix<T, i, j> result{};
-    for(std::size_t it = 1; it < i-1; it++)
+  for(std::size_t it = 1; it < i-1; it++)
+  {
+    for(std::size_t jt = 1; jt < j-1; jt++)
     {
-      for(std::size_t jt = 1; jt < j-1; jt++)
-      {
-        result[it][jt] = kernel[0][0] * A[it-1][jt-1] +
-          kernel[0][1] * A[it-1][jt] +
-          kernel[0][2] * A[it-1][jt+1] +
-          kernel[1][0] * A[it][jt-1] +
-          kernel[1][1] * A[it][jt] +
-          kernel[1][2] * A[it][jt+1] +
-          kernel[2][0] * A[it+1][jt-1] +
-          kernel[2][1] * A[it+1][jt] +
-          kernel[2][2] * A[it+1][jt+1];
-      }
+      result[it][jt] = kernel[0][0] * A[it-1][jt-1] +
+      kernel[0][1] * A[it-1][jt] +
+      kernel[0][2] * A[it-1][jt+1] +
+      kernel[1][0] * A[it][jt-1] +
+      kernel[1][1] * A[it][jt] +
+      kernel[1][2] * A[it][jt+1] +
+      kernel[2][0] * A[it+1][jt-1] +
+      kernel[2][1] * A[it+1][jt] +
+      kernel[2][2] * A[it+1][jt+1];
     }
+  }
   return result;
 }  
 #endif /* MATRIX_HPP_ */

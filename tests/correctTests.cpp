@@ -41,7 +41,7 @@ TEST_F(MatrixTest, equal)
 {
   const Matrix<float, 2, 2> A =
   { 1, 2,
-    0, 1 };
+    0, 1};
 
   const Matrix<float, 2, 2> B =
   { 1, 2,
@@ -75,7 +75,7 @@ TEST_F(MatrixTest, sum)
 
   auto sum = A + B;
 
-  const Matrix<float, 2, 2> res =
+  Matrix<float, 2, 2> res =
   {  7, 3,
     -1, 1 };
 
@@ -100,7 +100,6 @@ TEST_F(MatrixTest, sum_scalar)
   sum = 1.0f + A;
 
   ASSERT_EQ(sum, res);
-
 }
 
 TEST_F(MatrixTest, multiply)
@@ -404,7 +403,7 @@ TEST_F(MatrixTest, zeros)
 
 TEST_F(MatrixTest, compare)
 {
-  const Matrix<float, 2, 2> A =
+  Matrix<float, 2, 2> A =
   { 1, 2,
     0, 1 };
 
