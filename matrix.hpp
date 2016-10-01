@@ -823,9 +823,15 @@ Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
     }
   }
   return result;
-}  
+}
+
 /**
- * \ Concatenate two squared matrices, first vertically, second horizontally 
+ * \brief Concatenate two squared matrices
+ * 
+ * \param [in] Matrix A nxn
+ * \param [in] Matrix B nxn
+ *
+ * \return first of pair is matrix joined vertically, second horizontally 
  */
 template<typename T,  std::size_t n>
 std::pair<Matrix<T, (n+n), n>,Matrix<T, n, (n+n)>> concatenate(
@@ -862,7 +868,12 @@ std::pair<Matrix<T, (n+n), n>,Matrix<T, n, (n+n)>> concatenate(
 }
 
 /**
- * \ Concatenate two matrices vertically
+ * \brief Concatenate two matrices vertically
+ * 
+ * \param [in] Matrix A i1xj
+ * \param [in] Matrix B i2xj
+ *
+ * \return matrix joined vertically - size: (i1+i2)xj
  */
 template<typename T,  std::size_t i1, std::size_t i2, std::size_t j>
 Matrix<T, (i1+i2), j> concatenate(
@@ -888,7 +899,12 @@ Matrix<T, (i1+i2), j> concatenate(
 }
 
 /**
- * \ Concatenate two matrices horizontally
+ * \brief Concatenate two matrices horizontally
+ * 
+ * \param [in] Matrix A ixj1
+ * \param [in] Matrix B ixj2
+ *
+ * \return matrix joined horizontally - size: ix(j1+j2)
  */
 template<typename T,  std::size_t i, std::size_t j1, std::size_t j2>
 Matrix<T, i, (j1+j2)> concatenate(
@@ -910,9 +926,13 @@ Matrix<T, i, (j1+j2)> concatenate(
   return result;
 }
 
-
 /**
- * \ Concatenate two square (?) matrices vertically
+ * \brief Concatenate two square matrices vertically
+ * 
+ * \param [in] Matrix A nxn
+ * \param [in] Matrix B nxn
+ *
+ * \return matrix joined vertically - size: (2n)xn
  */
 template<typename T,  std::size_t n>
 Matrix<T, (n+n), n> concatenateVertically(
@@ -937,10 +957,13 @@ Matrix<T, (n+n), n> concatenateVertically(
   return result;
 }
 
-
-
 /**
- * \ Concatenate two square (?) matrices horizontally
+ * \brief Concatenate two square matrices horizontally
+ * 
+ * \param [in] Matrix A nxn
+ * \param [in] Matrix B nxn
+ *
+ * \return matrix joined horizontally - size: nx(2n)
  */
 template<typename T,  std::size_t n>
 Matrix<T, n,(n+n)> concatenateHorizontally(
