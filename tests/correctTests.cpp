@@ -578,6 +578,84 @@ TEST_F(MatrixTest, convolution)
   ASSERT_TRUE(areEqualsHighpass);
 }
 
+TEST_F(MatrixTest, concatenate)
+{
+  const Matrix<float, 2, 2> A =
+  { 4, 3,
+    6, 3};
+  const Matrix<float, 3, 2> B =
+  { 10, 12,
+    15, 13,
+    17, 11};
+  const Matrix<float, 5, 2> expected_AB =
+  { 4, 3,
+    6, 3,
+    10, 12,
+    15, 13,
+    17, 11};
+  auto AB = concatenate(A,B);
+  auto areEqualsVertically = compare(expected_AB, AB, 0.0001f);
+  ASSERT_TRUE(areEqualsVertically);
+
+  const Matrix<float, 2, 3> C =
+  { 4, 3, 1,
+    6, 3, 1};
+  const Matrix<float, 2, 2> D =
+  { 10, 12,
+    15, 13};
+  const Matrix<float, 2, 5> expected_CD =
+  { 4, 3, 1, 10, 12,
+    6, 3, 1, 15, 13};
+  auto CD = concatenate(C,D);
+  auto areEqualsHorizontally = compare(expected_CD, CD, 0.0001f);
+  ASSERT_TRUE(areEqualsHorizontally);
+
+  const Matrix<float, 2, 2> E =
+  { 4, 3,
+    6, 3};
+  const Matrix<float, 2, 2> F =
+  { 10, 12,
+    15, 13};
+  const Matrix<float, 4, 2> expected_EF =
+  { 4, 3,
+    6, 3,
+   10, 12,
+   15, 13};
+  auto EF = concatenateVertically(E,F);
+  auto areEqualsSqVer = compare(expected_EF, EF, 0.0001f);
+  ASSERT_TRUE(areEqualsSqVer);
+
+  const Matrix<float, 2, 2> G =
+  { 4, 3,
+    6, 3};
+  const Matrix<float, 2, 2> H =
+  { 10, 12,
+    15, 13};
+  const Matrix<float, 2, 4> expected_GH =
+  { 4, 3, 10, 12,
+    6, 3, 15, 13};
+  auto GH = concatenateHorizontally(G,H);
+  auto areEqualsSqHor = compare(expected_GH, GH, 0.0001f);
+  ASSERT_TRUE(areEqualsSqHor);
+
+  const Matrix<float, 2, 2> I =
+  { 4, 3,
+    6, 3};
+  const Matrix<float, 2, 2> J =
+  { 10, 12,
+    15, 13};
+  const Matrix<float, 4, 2> expected_IJ =
+  { 4, 3,
+    6, 3,
+   10, 12,
+   15, 13};
+  Matrix<float, 4, 2> IJ = concatenate(I,J).first;
+  auto areEqualsIJ = compare(expected_IJ, IJ, 0.0001f);
+  ASSERT_TRUE(areEqualsIJ);
+
+ 
+}
+
 int main(int argc, char* argv[])
 {
   //int i = 4;
