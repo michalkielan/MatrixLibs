@@ -5,8 +5,8 @@
 # Compiler
 COMPILER=g++
 
-# C++ standard, ex. c++0x, c++11, c++14
-CPP_STD= -std=c++14
+# C++ standard, ex. -std=c++0x, c++11, c++14; -std=gnu++11, gnu++14
+CPP_STD= -std=c++14 -std=gnu++14
 
 # Optimization, ex. O3, O2
 OPTIMIZATION=
@@ -18,7 +18,7 @@ TARGETS=
 LDFLAGS=
 
 # C, C++ flags
-CFLAGS=
+CXXFLAGS=
 
 # debug flag
 DBG= -g
@@ -35,11 +35,11 @@ SRC=
 if[${CXX?}=""]; then CXX=$(COMPILER); fi;
 
 
-CFLAGS+=$(CPP_STD)
-CFLAGS+=-Wall 
-CFLAGS+=-flto
-CFLAGS+=$(DBG)
-CFLAGS+=$(OPTIMIZATION)
+CXXFLAGS+=$(CPP_STD)
+CXXFLAGS+=-Wall 
+CXXFLAGS+=-flto
+CXXFLAGS+=$(DBG)
+CXXFLAGS+=$(OPTIMIZATION)
 
 INC+=.
 SRC+=./tests/
@@ -50,17 +50,13 @@ PERF_TEST=performanceTests
 TARGETS+=$(CORRECT_TEST)
 TARGETS+=$(PERF_TEST)
 
-CXXFLAGS+=-std=$(CPPSTANDARD) 
-CXXFLAGS+=$(CPPFLAGS)
-CXXFLAGS+=$(OPTIMIZATION)
-
 LDFLAGS+=-lgtest
 LDFLAGS+=-pthread
 LDFLAGS+=-flto
 
 all:
-	 $(CXX) $(CFLAGS) -I $(INC) $(SRC)$(CORRECT_TEST).cpp -o $(CORRECT_TEST) $(LDFLAGS)
-	 $(CXX) ${CFLAGS} -I $(INC) $(SRC)$(PERF_TEST).cpp -o $(PERF_TEST) $(LDFLAGS)
+	 $(CXX) $(CXXFLAGS) -I $(INC) $(SRC)$(CORRECT_TEST).cpp -o $(CORRECT_TEST) $(LDFLAGS)
+	 $(CXX) ${CXXFLAGS} -I $(INC) $(SRC)$(PERF_TEST).cpp -o $(PERF_TEST) $(LDFLAGS)
 
 clean:
 	rm -rf $(TARGETS) *.o plots/*
