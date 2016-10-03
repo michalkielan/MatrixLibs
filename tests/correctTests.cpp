@@ -276,6 +276,21 @@ TEST_F(MatrixTest, inv)
   auto areEquals = compare(inv(B), invB, 0.01f);
 
   ASSERT_TRUE(areEquals);
+
+  const Matrix<float, 4, 4> C =
+  {-1,  0,  2,  0,
+    0,  1, -1, -2,
+    0,  0,  1,  2,
+    0, -1,  1,  3};
+  const Matrix<float, 4, 4> invC =
+  {-1, -4,  2, -4,
+    0,  1,  1,  0,
+    0, -2,  1, -2,
+    0,  1,  0,  1};
+  print(invC); print(inv(C));
+  auto areEqualsC = compare(inv(C), invC, 0.01f);
+
+  ASSERT_TRUE(areEqualsC);
 }
 
 TEST_F(MatrixTest, trans_square_matrix)

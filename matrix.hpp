@@ -639,6 +639,10 @@ Matrix<T, 3, 3> inv(const Matrix<T, 3, 3>& A)
   return invA / detA; 
 }
 
+template<typename T,  std::size_t n>
+Matrix<T, n,(n+n)> concatenateHorizontally(
+  const Matrix<T, n, n>& A,
+  const Matrix<T, n, n>& B);
 
 /**
  * \brief Inverse of matrix nxn
@@ -651,15 +655,32 @@ template<typename T, std::size_t n>
 Matrix<T, n, n> inv(const Matrix<T, n, n>& A)
 {
   Matrix<T, n, n> invA{};
-  const auto detA = det(A);
+  auto one = ones<T, n, n>();
+  Matrix<T, n, n+n> temp =concatenateHorizontally(A,one);
+  T t{};
   for(std::size_t i = 0; i < n; i++)
   {
     for(std::size_t j = 0; j < n; j++)
     {
-      invA[i][j] = (((i+j) % 2) ? 1 : -1) * det(getminor(A,i,j));
+      if (i != j)
+      {
+        t = temp[j][i] / temp[i][i];
+        for(std::size_t k = 0; k < 2*n; k++)
+        {
+          temp[j][k] = temp[j][k] - t * temp[i][k];
+        }
+      }
     }
   }
-  return trans(invA)/ detA;
+  for(std::size_t i = 0; i < n; i++)
+  {
+    t = temp[i][i];
+    for(std::size_t j = 0; j < 2*n; j++)
+    {
+      temp[i][j] = temp[i][j] / t;
+    }
+  }
+  return invA;
 }
 
 
