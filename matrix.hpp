@@ -13,9 +13,6 @@
 #include <utility>
 #include <cmath>
 
- ////for debug only
- #include <iostream>
-
 
 /**
  * \bref Matrix type definition
