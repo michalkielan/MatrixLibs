@@ -1,4 +1,3 @@
-system "mkdir plots"
 cd 'plots' 
 
 sizex = 800

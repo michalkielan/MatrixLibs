@@ -25,11 +25,19 @@
  *
  */
 const bool fileMode = true;
-const std::string ext {".data"};
+const std::string ext {"data"};
+const auto mode = std::ostream::out | std::ofstream::trunc;
+
+
+inline std::string getFileName(const std::string& dir, const std::string& name, const std::string& ext)
+{
+  return std::string {dir + "/" + name + "." + ext};
+}
+
 /**
  * \brief Plots path
  */
-const std::string plotpath {"plots/"};
+const std::string plotpath {"plots"};
 
 
 using MatrixDataType = int;
@@ -181,7 +189,7 @@ TEST_F(MatrixPerformanceTest, fill_matrices)
 {
   using TimeFormat = std::chrono::microseconds;
   const std::string format   { "us" };
-  const std::size_t samples  { 10 };
+  const std::size_t samples  { 50 };
   const std::string filenameRowMajor { "fill_matrices_row_major" };
   const std::string filenameColMajor { "fill_matrices_col_major" };
   std::ofstream file;
@@ -189,7 +197,7 @@ TEST_F(MatrixPerformanceTest, fill_matrices)
 
   if(fileMode)
   {
-    file.open(plotpath + filenameRowMajor + ext, std::ostream::out);
+    file.open(getFileName(plotpath, filenameRowMajor, ext) , mode);
   }
 
 
@@ -210,7 +218,7 @@ TEST_F(MatrixPerformanceTest, fill_matrices)
 
   auto colf = [](auto&& A, auto&& B, std::size_t row,  std::size_t col)
   {
-    volatile MatrixDataType sum = 0;
+    MatrixDataType sum = 0;
     for(std::size_t i = 0; i< col; i++)
     {
       for(std::size_t j = 0; j< row; j++)
@@ -230,11 +238,17 @@ TEST_F(MatrixPerformanceTest, fill_matrices)
   measureTime<TimeFormat>(A6,  B6,  i[6],  i[6],  rowf, samples, *ostream);
   measureTime<TimeFormat>(A7,  B7,  i[7],  i[7],  rowf, samples, *ostream);
   measureTime<TimeFormat>(A8,  B8,  i[8],  i[8],  rowf, samples, *ostream);
+  measureTime<TimeFormat>(A9,  B9,  i[9],  i[9],  rowf, samples, *ostream);
+  measureTime<TimeFormat>(A10, B10, i[10], i[10], rowf, samples, *ostream);
+  measureTime<TimeFormat>(A11, B11, i[11], i[11], rowf, samples, *ostream);
+  measureTime<TimeFormat>(A12, B12, i[12], i[12], rowf, samples, *ostream);
+  measureTime<TimeFormat>(A13, B13, i[13], i[13], rowf, samples, *ostream);
+  measureTime<TimeFormat>(A14, B14, i[14], i[14], rowf, samples, *ostream);
 
-  if(fileMode)
+  if(fileMode)  
   {
     file.close();
-    file.open(plotpath + filenameColMajor + ext, std::ostream::out);
+    file.open(getFileName(plotpath, filenameColMajor, ext), mode);
     ostream = &file;
   }
 
@@ -247,7 +261,14 @@ TEST_F(MatrixPerformanceTest, fill_matrices)
   measureTime<TimeFormat>(A5,  B5,  i[5],  i[5],  colf, samples, *ostream);
   measureTime<TimeFormat>(A6,  B6,  i[6],  i[6],  colf, samples, *ostream);
   measureTime<TimeFormat>(A7,  B7,  i[7],  i[7],  colf, samples, *ostream);
+  measureTime<TimeFormat>(A8,  B8,  i[8],  i[8],  colf, samples, *ostream);
   measureTime<TimeFormat>(A9,  B9,  i[9],  i[9],  colf, samples, *ostream);
+  measureTime<TimeFormat>(A10, B10, i[10], i[10], colf, samples, *ostream);
+  measureTime<TimeFormat>(A11, B11, i[11], i[11], colf, samples, *ostream);
+  measureTime<TimeFormat>(A12, B12, i[12], i[12], colf, samples, *ostream);
+  measureTime<TimeFormat>(A13, B13, i[13], i[13], colf, samples, *ostream);
+  measureTime<TimeFormat>(A14, B14, i[14], i[14], colf, samples, *ostream);
+
 }
 
 
@@ -267,7 +288,7 @@ TEST_F(MatrixPerformanceTest, multiply_square)
 
   if(fileMode)
   {
-    file.open(plotpath + filename + ext, std::ostream::out);
+    file.open(getFileName(plotpath, filename, ext), mode);
   }
 
   /**

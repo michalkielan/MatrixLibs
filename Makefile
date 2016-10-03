@@ -63,4 +63,4 @@ all:
 	 $(CXX) ${CFLAGS} -I $(INC) $(SRC)$(PERF_TEST).cpp -o $(PERF_TEST) $(LDFLAGS)
 
 clean:
-	rm -rf $(TARGETS) *.o plots/
+	rm -rf $(TARGETS) *.o plots/*
