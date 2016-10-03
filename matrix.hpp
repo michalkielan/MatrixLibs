@@ -982,4 +982,39 @@ Matrix<T, n,(n+n)> concatenateHorizontally(
   return result;
 }
 
+/***
+ * \brief Zoom matrix x2 - degree = 0
+ *
+ * \details Just makes the matrix zoomed. Every single pixel is duplicated
+ * to the right. After that every row is copied and located below.
+ * \param [in] Matrix A nxn
+ * \param [in] degree
+ *
+ * \return matrix - size: (2n)x(2n)
+ */
+template<typename T,  std::size_t n>
+Matrix<T, (2*n), (2*n)> zoom(const Matrix<T, n, n>& A, unsigned int degree)
+{
+  Matrix<T, (2*n), (2*n)> result{};
+  std::size_t ir = 0;
+  std::size_t jr = 0;
+  for (std::size_t i = 0; i < n; i++)
+  {
+    for (std::size_t j = 0; j < n; j++)
+    {
+      result[ir][jr++] = A[i][j];
+      result[ir][jr++] = A[i][j];
+    }
+    jr = 0;
+    ir++;
+    //duplicate row
+    for (std::size_t k = 0; k < 2*n; k++)
+    {
+      result[ir][k] = result[ir-1][k];
+    }
+    ir++;
+  }
+  return result;
+}
+
 #endif /* MATRIX_HPP_ */
