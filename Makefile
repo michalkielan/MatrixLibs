@@ -54,9 +54,24 @@ LDFLAGS+=-lgtest
 LDFLAGS+=-pthread
 LDFLAGS+=-flto
 
+TESTS=
+
+TESTS+=run_tests_performance 
+TESTS+=run_tests_correct
+
+.PHONY: clean all run_tests_all $(TESTS)
+
 all:
 	 $(CXX) $(CXXFLAGS) -I $(INC) $(SRC)$(CORRECT_TEST).cpp -o $(CORRECT_TEST) $(LDFLAGS)
 	 $(CXX) ${CXXFLAGS} -I $(INC) $(SRC)$(PERF_TEST).cpp -o $(PERF_TEST) $(LDFLAGS)
+
+run_tests_performance:
+	./$(PERF_TEST)
+
+run_tests_correct:
+	./$(CORRECT_TEST)
+
+run_test_all: $(TESTS)
 
 clean:
 	rm -rf $(TARGETS) *.o plots/*
