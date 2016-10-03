@@ -656,6 +656,21 @@ TEST_F(MatrixTest, concatenate)
  
 }
 
+TEST_F(MatrixTest, zoom)
+{
+  const Matrix<float, 2, 2> A =
+  { 4, 3,
+    6, 8};
+  const Matrix<float, 4, 4> zoomedA =
+  { 4, 4, 3, 3,
+    4, 4, 3, 3,
+    6, 6, 8, 8,
+    6, 6, 8, 8 };
+  auto areEquals = compare(zoomedA, zoom(A,0), 0.0001f);
+  ASSERT_TRUE(areEquals);
+}
+
+
 int main(int argc, char* argv[])
 {
   //int i = 4;
