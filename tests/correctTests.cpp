@@ -225,6 +225,7 @@ TEST_F(MatrixTest, det)
 
   ASSERT_EQ(det(B), -5);
 
+#ifdef DET_IMPLEMENTED
   const Matrix<int, 4, 4> C =
   { 1, 2,  3,  4,
     5, 6,  7,  8,
@@ -232,6 +233,7 @@ TEST_F(MatrixTest, det)
     2, 1,  -4, 0 };
 
   ASSERT_EQ(det(C), 196);
+#endif
 }
 
 TEST_F(MatrixTest, identity)
@@ -277,23 +279,21 @@ TEST_F(MatrixTest, inv)
      0.25,  0.25, -0.25,
     -0.15, -0.35,  0.55 };
 
-  auto areEquals = compare(inv(B), invB, 0.01f);
-
-  ASSERT_TRUE(areEquals);
+  ASSERT_TRUE(compare(inv(B), invB, 0.01f));
 
   const Matrix<float, 4, 4> C =
   { 1,  2,  3,  4,
     2,  3,  1,  2,
     1,  1,  1, -1,
     1,  0, -2, -6};
+
   const Matrix<float, 4, 4> invC =
   { 22, -6, -26,  17,
    -17,  5,  20, -13,
     -1,  0,   2,  -1,
      4, -1,  -5,   3};
-  auto areEqualsC = compare(inv(C), invC, 0.01f);
 
-  ASSERT_TRUE(areEqualsC);
+  ASSERT_TRUE(compare(inv(C), invC, 0.01f));
 }
 
 TEST_F(MatrixTest, trans_square_matrix)
@@ -303,14 +303,12 @@ TEST_F(MatrixTest, trans_square_matrix)
     0, 1, -3,
     3, 5,  1 };
 
-  const auto transA = trans(A);
-
   const Matrix<float, 3, 3> res =
   { 1,  0, 3,
     2,  1, 5,
     1, -3, 1 };
 
-  ASSERT_EQ(transA, res);
+  ASSERT_EQ(trans(A), res);
 }
 
 TEST_F(MatrixTest, trans_not_square_matrix)
@@ -319,14 +317,12 @@ TEST_F(MatrixTest, trans_not_square_matrix)
   { 1, 2, 3,
     4, 5, 6 };
 
-  const auto transA = trans(A);
-
   const Matrix<float, 3, 2> res =
   { 1, 4,
     2, 5,
     3, 6 };
 
-  ASSERT_EQ(transA, res);
+  ASSERT_EQ(trans(A), res);
 }
 
 TEST_F(MatrixTest, eye)
@@ -401,8 +397,7 @@ TEST_F(MatrixTest, compare)
   {  6, 1,
     -1, 0 };
 
-  auto areEquals = compare(A, B, 0.0001f);
-  ASSERT_FALSE(areEquals);
+  ASSERT_FALSE(compare(A, B, 0.0001f));
 
   const Matrix<float, 2, 2> C =
   { 1.0,    2.000005,
@@ -412,8 +407,7 @@ TEST_F(MatrixTest, compare)
   { 1.1,    2.000009,
     1.0005, 1.05 };
 
-  areEquals = compare(C, D, 0.00001f);
-  ASSERT_FALSE(areEquals);
+  ASSERT_FALSE(compare(C, D, 0.00001f));
 
   const Matrix<float, 2, 2> E =
   { -1.1,    -2.00000,
@@ -423,8 +417,7 @@ TEST_F(MatrixTest, compare)
   { -1.1,    -2.00000,
     -1.0001, -1.01 };
 
-  areEquals = compare(E, F, 0.01f);
-  ASSERT_TRUE(areEquals);
+  ASSERT_TRUE(compare(E, F, 0.01f));
 
   const Matrix<float, 2, 2> G =
   { 1.1,    2.00000,
@@ -434,8 +427,7 @@ TEST_F(MatrixTest, compare)
   { -1.1,    -2.00000,
     -1.0001, -1.01 };
 
-  areEquals = compare(G, H, 0.01f);
-  ASSERT_FALSE(areEquals);
+  ASSERT_FALSE(compare(G, H, 0.01f));
 }
 
 TEST_F(MatrixTest, pow)
@@ -446,35 +438,20 @@ TEST_F(MatrixTest, pow)
     3, 4
   };
 
-   auto isEqual = eye<float, 2>() == pow(A,0);
-   ASSERT_TRUE(isEqual);
+   ASSERT_EQ((eye<float, 2>()), pow(A,0));
 
-   isEqual = (A) == pow(A,1);
-   ASSERT_TRUE(isEqual);
-
-   isEqual = (A*A) == pow(A,2);
-   ASSERT_TRUE(isEqual);
-
-   isEqual = (A*A*A) == pow(A,3);
-   ASSERT_TRUE(isEqual);
-
-   isEqual = (A*A*A*A) == pow(A,4);
-   ASSERT_TRUE(isEqual);
-
+   ASSERT_EQ( (A),         pow(A,1) );
+   ASSERT_EQ( (A*A),       pow(A,2) );
+   ASSERT_EQ( (A*A*A),     pow(A,3) );
+   ASSERT_EQ( (A*A*A*A),   pow(A,4) );
+   ASSERT_EQ( (A*A*A*A*A), pow(A,5) );
+   
    auto invA = inv(A);
-
-   isEqual = (invA) == pow(A,-1);
-   ASSERT_TRUE(isEqual);
-
-   isEqual = (invA*invA) == pow(A,-2);
-   ASSERT_TRUE(isEqual);
-
-   isEqual = (invA*invA*invA) == pow(A,-3);
-   ASSERT_TRUE(isEqual);
-
-   isEqual = (invA*invA*invA*invA) == pow(A,-4);
-   ASSERT_TRUE(isEqual);
-
+   ASSERT_EQ( (invA),                     pow(A,-1));
+   ASSERT_EQ( (invA*invA),                pow(A,-2));
+   ASSERT_EQ( (invA*invA*invA),           pow(A,-3));
+   ASSERT_EQ( (invA*invA*invA*invA),      pow(A,-4));
+   ASSERT_EQ( (invA*invA*invA*invA*invA), pow(A,-5));
 }
 
 TEST_F(MatrixTest, LU_3x3)
@@ -492,24 +469,22 @@ TEST_F(MatrixTest, LU_3x3)
   {     1,      0, 0,
     1/5.0,      1, 0,
     3/5.0, -9/7.0, 1};
-  auto areEqualsL = compare(expected_L, L, 0.0001f);
-  ASSERT_TRUE(areEqualsL);
+
+  ASSERT_TRUE(compare(expected_L, L, 0.0001f));
 
   const Matrix<float, 3, 3> expected_U =
   { 5,     3,      2,
     0, 7/5.0, -2/5.0,
     0,     0, 16/7.0};
 
-  auto areEqualsU = compare(expected_U, U, 0.0001f);
-  ASSERT_TRUE(areEqualsU);
+  ASSERT_TRUE(compare(expected_U, U, 0.0001f));
 
   const Matrix<float, 3, 3> random =
   { 1,     1,  -1000,
     1, 7/5.0, -2/5.0,
     1,     1,      1};
 
-  auto areNotEqualsU = compare(random, U, 0.0001f);
-  ASSERT_FALSE(areNotEqualsU);
+  ASSERT_FALSE(compare(random, U, 0.0001f));
 }
 
 
@@ -526,15 +501,13 @@ TEST_F(MatrixTest, LU_2x2)
   const Matrix<float, 2, 2> expected_L =
   { 1, 0,
   1.5, 1};
-  auto areEqualsL = compare(expected_L, L, 0.0001f);
-  ASSERT_TRUE(areEqualsL);
+  ASSERT_TRUE(compare(expected_L, L, 0.0001f));
 
   const Matrix<float, 2, 2> expected_U =
   { 4,    3,
     0, -1.5};
 
-  auto areEqualsU = compare(expected_U, U, 0.0001f);
-  ASSERT_TRUE(areEqualsU);
+  ASSERT_TRUE(compare(expected_U, U, 0.0001f));
 
   // const Matrix<float, 2, 2> random =
   // { 4.0f, 12.0f,
@@ -568,8 +541,7 @@ TEST_F(MatrixTest, convolution)
 
   auto after_conv = conv2(A,kernel);
 
-  auto areEquals = compare(expected_after_conv, after_conv, 0.0001f);
-  ASSERT_TRUE(areEquals);
+  ASSERT_TRUE(compare(expected_after_conv, after_conv, 0.0001f));
 
   const Matrix<float, 5, 5> B =
  { 5, 5, 5, 5, 5,
@@ -592,8 +564,7 @@ TEST_F(MatrixTest, convolution)
 
   auto after_highpass = conv2(B,kernel_highpass);
 
-  auto areEqualsHighpass = compare(expected_after_highpass, after_highpass, 0.0001f);
-  ASSERT_TRUE(areEqualsHighpass);
+  ASSERT_TRUE(compare(expected_after_highpass, after_highpass, 0.0001f));
 }
 
 TEST_F(MatrixTest, concatenate)
@@ -611,9 +582,9 @@ TEST_F(MatrixTest, concatenate)
     10, 12,
     15, 13,
     17, 11};
+
   auto AB = concatenate(A,B);
-  auto areEqualsVertically = compare(expected_AB, AB, 0.0001f);
-  ASSERT_TRUE(areEqualsVertically);
+  ASSERT_TRUE(compare(expected_AB, AB, 0.0001f));
 
   const Matrix<float, 2, 3> C =
   { 4, 3, 1,
@@ -624,54 +595,59 @@ TEST_F(MatrixTest, concatenate)
   const Matrix<float, 2, 5> expected_CD =
   { 4, 3, 1, 10, 12,
     6, 3, 1, 15, 13};
+
   auto CD = concatenate(C,D);
-  auto areEqualsHorizontally = compare(expected_CD, CD, 0.0001f);
-  ASSERT_TRUE(areEqualsHorizontally);
+
+  ASSERT_TRUE(compare(expected_CD, CD, 0.0001f));
 
   const Matrix<float, 2, 2> E =
   { 4, 3,
     6, 3};
+
   const Matrix<float, 2, 2> F =
   { 10, 12,
     15, 13};
+
   const Matrix<float, 4, 2> expected_EF =
   { 4, 3,
     6, 3,
    10, 12,
    15, 13};
+
   auto EF = concatenateVertically(E,F);
-  auto areEqualsSqVer = compare(expected_EF, EF, 0.0001f);
-  ASSERT_TRUE(areEqualsSqVer);
+  ASSERT_TRUE(compare(expected_EF, EF, 0.0001f));
 
   const Matrix<float, 2, 2> G =
   { 4, 3,
     6, 3};
+
   const Matrix<float, 2, 2> H =
   { 10, 12,
     15, 13};
+
   const Matrix<float, 2, 4> expected_GH =
   { 4, 3, 10, 12,
     6, 3, 15, 13};
+
   auto GH = concatenateHorizontally(G,H);
-  auto areEqualsSqHor = compare(expected_GH, GH, 0.0001f);
-  ASSERT_TRUE(areEqualsSqHor);
+  ASSERT_TRUE(compare(expected_GH, GH, 0.0001f));
 
   const Matrix<float, 2, 2> I =
   { 4, 3,
     6, 3};
+
   const Matrix<float, 2, 2> J =
   { 10, 12,
     15, 13};
+
   const Matrix<float, 4, 2> expected_IJ =
   { 4, 3,
     6, 3,
    10, 12,
    15, 13};
-  Matrix<float, 4, 2> IJ = concatenate(I,J).first;
-  auto areEqualsIJ = compare(expected_IJ, IJ, 0.0001f);
-  ASSERT_TRUE(areEqualsIJ);
 
- 
+  Matrix<float, 4, 2> IJ = concatenate(I,J).first;
+  ASSERT_TRUE(compare(expected_IJ, IJ, 0.0001f));
 }
 
 TEST_F(MatrixTest, getminor)
@@ -680,38 +656,36 @@ TEST_F(MatrixTest, getminor)
   { 1, 2, 3,
     4, 5, 6,
     7, 8, 9 };
+
   const Matrix<float, 2, 2> Aminor2x2 =
   { 1, 2,
     4, 5 };
-  auto AareEquals2x2 = compare(getminor(A,2,2), Aminor2x2, 0.01f);
-  ASSERT_TRUE(AareEquals2x2);
+
+  ASSERT_TRUE(compare(getminor(A,2,2), Aminor2x2, 0.01f));
 
   const Matrix<float, 4, 4> C =
   { 1,  2,  3,  4,
     2,  3,  1,  2,
     1,  1,  1, -1,
     1,  0, -2, -6};
+
   const Matrix<float, 3, 3> minor0x0 =
   { 3,  1,  2,
     1,  1, -1,
     0, -2, -6};
-  auto areEquals0x0 = compare(getminor(C,0,0), minor0x0, 0.01f);
-  ASSERT_TRUE(areEquals0x0);
+
+  ASSERT_TRUE(compare(getminor(C,0,0), minor0x0, 0.01f));
+
   const Matrix<float, 3, 3> minor1x1 =
   { 1,  3,  4,
     1,  1, -1,
     1, -2, -6};
-  auto areEquals1x1 = compare(getminor(C,1,1), minor1x1, 0.01f);
-  ASSERT_TRUE(areEquals1x1);
+
+  ASSERT_TRUE(compare(getminor(C,1,1), minor1x1, 0.01f));
 }
 
 int main(int argc, char* argv[])
 {
-  //int i = 4;
-  //auto* p = new Matrix<int, 2, i>{};
-
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
-
-
