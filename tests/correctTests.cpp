@@ -216,18 +216,22 @@ TEST_F(MatrixTest, det)
   { 1, 2,
     0, 1 };
 
-  auto detA = det(A);
-
-  ASSERT_EQ(detA, 1);
+  ASSERT_EQ(det(A), 1);
 
   const Matrix<float, 3, 3> B =
   { 1, 2,  1,
     0, 1, -3,
     3, 5,  1 };
 
-  auto detB = det(B);
+  ASSERT_EQ(det(B), -5);
 
-  ASSERT_EQ(detB, -5);
+  const Matrix<int, 4, 4> C =
+  { 1, 2,  3,  4,
+    5, 6,  7,  8,
+    9, 10, 2,  2,
+    2, 1,  -4, 0 };
+
+  ASSERT_EQ(det(C), 196);
 }
 
 TEST_F(MatrixTest, identity)
