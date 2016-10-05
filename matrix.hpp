@@ -532,18 +532,22 @@ template<typename T, std::size_t n>
 Matrix<T, (n-1), (n-1)> getminor(const Matrix<T, n, n>& A, std::size_t i, std::size_t j)
 {
   Matrix<T, (n-1), (n-1)> minor{};
-  std::size_t it = 0, jt = 0;
+  std::size_t colCount = 0,rowCount=0;
   for(std::size_t k = 0; k < n; k++)
   {
-    for(std::size_t l = 0; l < n; l++)
+    if (k != i)
     {
-      if (k != i || l != j)
+      colCount = 0;
+      for(std::size_t l = 0; l < n; l++)
       {
-        minor[it][jt] = A[k][l];
-        jt++;
+        if (l != j)
+        {
+          minor[rowCount][colCount] = A[k][l];
+          colCount++;
+        }
       }
+      rowCount++; 
     }
-    it++; jt=0;
   }
   return minor;
 }
@@ -639,6 +643,10 @@ Matrix<T, 3, 3> inv(const Matrix<T, 3, 3>& A)
   return invA / detA; 
 }
 
+template<typename T,  std::size_t n>
+Matrix<T, n,(n+n)> concatenateHorizontally(
+  const Matrix<T, n, n>& A,
+  const Matrix<T, n, n>& B);
 
 /**
  * \brief Inverse of matrix nxn
@@ -656,7 +664,7 @@ Matrix<T, n, n> inv(const Matrix<T, n, n>& A)
   {
     for(std::size_t j = 0; j < n; j++)
     {
-      invA[i][j] = (((i+j) % 2) ? 1 : -1) * det(getminor(A,i,j));
+      invA[i][j] = (((i+j) % 2) ? -1 : 1) * det(getminor(A,i,j));
     }
   }
   return trans(invA)/ detA;
