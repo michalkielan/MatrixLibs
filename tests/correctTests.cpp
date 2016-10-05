@@ -228,6 +228,15 @@ TEST_F(MatrixTest, det)
   auto detB = det(B);
 
   ASSERT_EQ(detB, -5);
+
+  const Matrix<float, 3, 3> C =
+  { 3, 1,  2,
+    1, 1, -1,
+    0,-2, -6 };
+
+  auto detC = det(C);
+
+  ASSERT_EQ(detC, -22);
 }
 
 TEST_F(MatrixTest, identity)
@@ -276,6 +285,20 @@ TEST_F(MatrixTest, inv)
   auto areEquals = compare(inv(B), invB, 0.01f);
 
   ASSERT_TRUE(areEquals);
+
+  const Matrix<float, 4, 4> C =
+  { 1,  2,  3,  4,
+    2,  3,  1,  2,
+    1,  1,  1, -1,
+    1,  0, -2, -6};
+  const Matrix<float, 4, 4> invC =
+  { 22, -6, -26,  17,
+   -17,  5,  20, -13,
+    -1,  0,   2,  -1,
+     4, -1,  -5,   3};
+  auto areEqualsC = compare(inv(C), invC, 0.01f);
+
+  ASSERT_TRUE(areEqualsC);
 }
 
 TEST_F(MatrixTest, trans_square_matrix)
@@ -654,6 +677,37 @@ TEST_F(MatrixTest, concatenate)
   ASSERT_TRUE(areEqualsIJ);
 
  
+}
+
+TEST_F(MatrixTest, getminor)
+{
+  const Matrix<float, 3, 3> A =
+  { 1, 2, 3,
+    4, 5, 6,
+    7, 8, 9 };
+  const Matrix<float, 2, 2> Aminor2x2 =
+  { 1, 2,
+    4, 5 };
+  auto AareEquals2x2 = compare(getminor(A,2,2), Aminor2x2, 0.01f);
+  ASSERT_TRUE(AareEquals2x2);
+
+  const Matrix<float, 4, 4> C =
+  { 1,  2,  3,  4,
+    2,  3,  1,  2,
+    1,  1,  1, -1,
+    1,  0, -2, -6};
+  const Matrix<float, 3, 3> minor0x0 =
+  { 3,  1,  2,
+    1,  1, -1,
+    0, -2, -6};
+  auto areEquals0x0 = compare(getminor(C,0,0), minor0x0, 0.01f);
+  ASSERT_TRUE(areEquals0x0);
+  const Matrix<float, 3, 3> minor1x1 =
+  { 1,  3,  4,
+    1,  1, -1,
+    1, -2, -6};
+  auto areEquals1x1 = compare(getminor(C,1,1), minor1x1, 0.01f);
+  ASSERT_TRUE(areEquals1x1);
 }
 
 int main(int argc, char* argv[])
