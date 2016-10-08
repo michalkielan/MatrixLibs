@@ -990,4 +990,23 @@ Matrix<T, n,(n+n)> concatenateHorizontally(
   return result;
 }
 
+/**    
+ * \brief Return trace of square matrix
+ *
+ * \patam [in] Matrix A nxn
+ *
+ * \return sum of the elements on the main diagonal 
+ * (from the upper left to the lower right)
+ */
+template<typename T,  std::size_t n>
+T trace(const Matrix<T, n, n>& A)
+{
+  T sum{};
+  for (std::size_t i = 0; i < n; i++)
+  {
+    sum += A[i][i];
+  }
+  return sum;
+}
+
 #endif /* MATRIX_HPP_ */

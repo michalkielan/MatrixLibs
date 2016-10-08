@@ -684,6 +684,22 @@ TEST_F(MatrixTest, getminor)
   ASSERT_TRUE(compare(getminor(C,1,1), minor1x1, 0.01f));
 }
 
+TEST_F(MatrixTest, trace)
+{
+  const Matrix<float, 2, 2> A =
+  { 4, 3,
+    6, 3};
+
+  ASSERT_EQ(trace(A), 7);
+
+  const Matrix<float, 3, 3> B =
+  { 10, 12, 0,
+    15, 13, 0,
+    17, 11, 7};
+
+  ASSERT_EQ(trace(B), 30);
+}
+
 int main(int argc, char* argv[])
 {
   ::testing::InitGoogleTest(&argc, argv);
