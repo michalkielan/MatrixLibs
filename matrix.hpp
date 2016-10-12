@@ -12,6 +12,7 @@
 #include <array>
 #include <utility>
 #include <cmath>
+#include <map>
 
 
 /**
@@ -990,4 +991,26 @@ Matrix<T, n,(n+n)> concatenateHorizontally(
   return result;
 }
 
+/***
+ * \brief Histogram
+ *
+ * \param [in] Matrix A ixj
+ *
+ * \return std::map with unique value of matrix A as key value and
+ *         quantity of that unique value as mapped value.
+ */
+template<typename T, std::size_t i, std::size_t j>
+std::map<T,std::size_t> histogram(
+  const Matrix<T, i, j>& A)
+{
+  std::map<T,std::size_t> histogram{};
+  for (std::size_t it = 0; it < i; it++)
+  {
+    for (std::size_t jt = 0; jt < j; jt++)
+    {
+      histogram[A[it][jt]]++;
+    }
+  }
+  return histogram;
+}
 #endif /* MATRIX_HPP_ */
