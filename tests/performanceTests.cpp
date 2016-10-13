@@ -178,6 +178,42 @@ class MatrixPerformanceTest : public ::testing::Test
 
 };
 
+TEST_F(MatrixPerformanceTest, histogram)
+{
+  const std::string filenameRowMajor { "histogram" };
+  std::ofstream file;
+  auto* ostream = fileMode ? &file : &std::cout;
+
+  if(fileMode)
+  {
+    file.open(getFileName(plotpath, filenameRowMajor, ext) , mode);
+  }
+
+  const Matrix<float, 5, 5> A =
+  { 1, 2, 2, 3, 3,
+    4, 4, 2, 3, 3,
+    7, 8, 4, 3, 6,
+    6, 5, 5, 5, 9,
+    3, 3, 5, 6, 6 };
+  auto histA = histogram(A);
+
+  ASSERT_EQ(histA[1],1);
+  ASSERT_EQ(histA[2],3);
+  ASSERT_EQ(histA[4],3);
+  ASSERT_EQ(histA[7],1);
+  ASSERT_EQ(histA[8],1);
+
+  printPlot("value", "quantity", *ostream);
+  for (const auto &p : histA) {
+    printPlot(p.first, p.second, *ostream);
+  }
+
+  if(fileMode)
+  {
+    file.close();
+  }
+}
+
 /**
  * \brief Measure the difference time between filling matrices starting from row or col loop
  *

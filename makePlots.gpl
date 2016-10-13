@@ -14,10 +14,10 @@ set grid xtics lt 0 lw 1 lc rgb "#bbbbbb"
 set ylabel "time [ms]"
 set xlabel "size [n]"
 
+
 filename = "multiply_square"
 set output data(filename)
 plot image(filename) using 1:2 with lines title filename
-
 
 filenameRow = "fill_matrices_row_major"
 filenameCol = "fill_matrices_col_major"
@@ -25,4 +25,10 @@ set output data("fill")
 plot image(filenameRow) using 1:2 with lines title "row", \
      image(filenameCol) using 1:2 with lines title "col"
 
-
+filename = "histogram"
+set ylabel "quantity"
+set xlabel "value"
+set output data(filename)
+set style fill solid
+set boxwidth 0.5
+plot image(filename) using 1:2 with boxes
