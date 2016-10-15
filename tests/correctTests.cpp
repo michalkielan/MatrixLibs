@@ -686,7 +686,7 @@ TEST_F(MatrixTest, getminor)
 
 TEST_F(MatrixTest, stats)
 {
-  float eps = 0.01f;
+  constexpr float eps = 0.01f;
 
   const Matrix<float, 3, 3> A =
   { 1, 2, 3,
