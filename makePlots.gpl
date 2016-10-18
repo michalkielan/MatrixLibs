@@ -25,10 +25,21 @@ set output data("fill")
 plot image(filenameRow) using 1:2 with lines title "row", \
      image(filenameCol) using 1:2 with lines title "col"
 
-filename = "histogram"
+filenameHist = "histogram"
+filenameHistCum = "histogram_cumul"
 set ylabel "quantity"
 set xlabel "value"
 set output data(filename)
 set style fill solid
 set boxwidth 0.5
-plot image(filename) using 1:2 with boxes
+plot image(filenameHist) using 1:2 with boxes, \
+     image(filenameHistCum) using 1:2 with boxes
+
+filename = "histogram_cumul"
+set ylabel "quantity of not greater than..."
+set xlabel "value"
+set output data(filename)
+plot image(filename) using 1:2 with lines
+
+
+

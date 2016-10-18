@@ -180,13 +180,14 @@ class MatrixPerformanceTest : public ::testing::Test
 
 TEST_F(MatrixPerformanceTest, histogram)
 {
-  const std::string filenameRowMajor { "histogram" };
+  const std::string filenameHistogram { "histogram" };
+  const std::string filenameCumulativeHistogram { "histogram_cumul" };
   std::ofstream file;
   auto* ostream = fileMode ? &file : &std::cout;
 
   if(fileMode)
   {
-    file.open(getFileName(plotpath, filenameRowMajor, ext) , mode);
+    file.open(getFileName(plotpath, filenameHistogram, ext) , mode);
   }
 
   const Matrix<float, 5, 5> A =
@@ -195,6 +196,7 @@ TEST_F(MatrixPerformanceTest, histogram)
     7, 8, 4, 3, 6,
     6, 5, 5, 5, 9,
     3, 3, 5, 6, 6 };
+
   auto histA = histogram(A);
 
   ASSERT_EQ(histA[1],1);
@@ -205,6 +207,33 @@ TEST_F(MatrixPerformanceTest, histogram)
 
   printPlot("value", "quantity", *ostream);
   for (const auto &p : histA) {
+    printPlot(p.first, p.second, *ostream);
+  }
+
+  if(fileMode)
+  {
+    file.close();
+  }
+
+  if(fileMode)
+  {
+    file.open(getFileName(plotpath, filenameCumulativeHistogram, ext) , mode);
+  }
+
+  auto cumul_histA = cumulative_histogram(A);
+
+  ASSERT_EQ(cumul_histA[1],1);
+  ASSERT_EQ(cumul_histA[2],4);
+  ASSERT_EQ(cumul_histA[3],11);
+  ASSERT_EQ(cumul_histA[4],14);
+  ASSERT_EQ(cumul_histA[5],18);
+  ASSERT_EQ(cumul_histA[6],22);
+  ASSERT_EQ(cumul_histA[7],23);
+  ASSERT_EQ(cumul_histA[8],24);
+  ASSERT_EQ(cumul_histA[9],25);
+
+  printPlot("value", "quantity", *ostream);
+  for (const auto &p : cumul_histA) {
     printPlot(p.first, p.second, *ostream);
   }
 
