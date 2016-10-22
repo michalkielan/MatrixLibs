@@ -13,11 +13,12 @@
 #include <utility>
 #include <cmath>
 #include <algorithm>
+#include <map>
 
 /**
- * \bref Matrix type definition
+ * @bref Matrix type definition
  *
- * \Usage: Matrix<type, row, col>
+ * @Usage: Matrix<type, row, col>
  */
 template <typename T, std::size_t i, std::size_t j,
 typename Arithmetic = std::enable_if_t<std::is_arithmetic<T>::value>>
@@ -25,12 +26,12 @@ using Matrix = std::array<std::array<T, j>, i>;
 
 
 /**
- * \brief Create i,j matrix filling with some data
+ * @brief Create i,j matrix filling with some data
  * 
  * Usage: <type, row , col>(data)
- * \param [in] data to fill the matrix
+ * @param [in] data to fill the matrix
  * 
- * \return matrix with i, j size
+ * @return matrix with i, j size
  */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> fill(T data)
@@ -46,11 +47,11 @@ Matrix<T, i, j> fill(T data)
 
 
 /**
- * \brief Create i,j matrix filling with one
+ * @brief Create i,j matrix filling with one
  * 
  * Usage: <type, row , col>(data)
  * 
- * \return matrix with i, j size
+ * @return matrix with i, j size
  */
 template<unsigned int, std::size_t i, std::size_t j = i>
 Matrix<unsigned int, i, j> ones()
@@ -66,11 +67,11 @@ Matrix<T, i, i> ones()
 
 
 /**
- * \brief Create i,j matrix filling with zeros
+ * @brief Create i,j matrix filling with zeros
  * 
  * Usage: <type, row , col>(data)
  * 
- * \return matrix with i, j size
+ * @return matrix with i, j size
  */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> zeros()
@@ -80,12 +81,12 @@ Matrix<T, i, j> zeros()
 
 
 /**
- * \brief Create a matrix with one number at the diagonal
+ * @brief Create a matrix with one number at the diagonal
  * 
  * Usage: <type, row , col>(data) or <type, row , col>()
- * \param [in] data to fill the matrix if empty, the default is 1
+ * @param [in] data to fill the matrix if empty, the default is 1
  * 
- * \return matrix with i, j size
+ * @return matrix with i, j size
  */
 template<typename T, std::size_t n>
 Matrix<T, n, n> eye(T data = 1)
@@ -101,12 +102,12 @@ Matrix<T, n, n> eye(T data = 1)
 
 
 /**
- * \brief Sum of two matrices
+ * @brief Sum of two matrices
  * 
- * \param [in] Matrix A with i, j size
- * \param [in] Matrix B with i, j size
+ * @param [in] Matrix A with i, j size
+ * @param [in] Matrix B with i, j size
  * 
- * \return Result of sum matrix A and B
+ * @return Result of sum matrix A and B
  */
 template<typename T,  std::size_t i, std::size_t j>
 static Matrix<T, i, j> sum(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
@@ -125,12 +126,12 @@ static Matrix<T, i, j> sum(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
 
 
 /**
- * \brief Sum matrix and scalar
+ * @brief Sum matrix and scalar
  * 
- * \param [in] Matrix A with i, j size
- * \param [in] Scalar data with the same type as matrix A
+ * @param [in] Matrix A with i, j size
+ * @param [in] Scalar data with the same type as matrix A
  * 
- * \return Result of sum each element of A matrix and scalar data
+ * @return Result of sum each element of A matrix and scalar data
  */
 template<typename T, std::size_t i, std::size_t j>
 static Matrix<T, i, j> sum(const Matrix<T, i, j>& A, const T scalar)
@@ -149,12 +150,12 @@ static Matrix<T, i, j> sum(const Matrix<T, i, j>& A, const T scalar)
 
 
 /**
- * \brief Substraction of two matrices
+ * @brief Substraction of two matrices
  * 
- * \param [in] Matrix A with i, j size
- * \param [in] Matrix B with i, j size
+ * @param [in] Matrix A with i, j size
+ * @param [in] Matrix B with i, j size
  * 
- * \return Result of substraction matrix A and B
+ * @return Result of substraction matrix A and B
  */
 template<typename T,  std::size_t i, std::size_t j>
 static Matrix<T, i, j> sub(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
@@ -173,12 +174,12 @@ static Matrix<T, i, j> sub(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
 
 
 /**
- * \brief Substraction matrix and scalar
+ * @brief Substraction matrix and scalar
  * 
- * \param [in] Matrix A with i, j size
- * \param [in] Scalar data with the same type as matrix A
+ * @param [in] Matrix A with i, j size
+ * @param [in] Scalar data with the same type as matrix A
  * 
- * \return Result of substraction each element of A matrix and scalar data
+ * @return Result of substraction each element of A matrix and scalar data
  */
 template<typename T, std::size_t i, std::size_t j>
 static Matrix<T, i, j> sub(const Matrix<T, i, j>& A, const T scalar)
@@ -197,14 +198,14 @@ static Matrix<T, i, j> sub(const Matrix<T, i, j>& A, const T scalar)
 
 
 /**
- * \brief  Multiplication of two matrices
+ * @brief  Multiplication of two matrices
  *
  * Usage: If sizes of matrix A and B are illegal to multiply,
  *        the function will not compile
- * \param [in] Matrix A with n, m size
- * \param [in] Matrix B with m, p size
+ * @param [in] Matrix A with n, m size
+ * @param [in] Matrix B with m, p size
  * 
- * \return Result of multiplication matrix A and B
+ * @return Result of multiplication matrix A and B
  */
 template<typename T,  std::size_t n, std::size_t m, std::size_t p>
 static Matrix<T, n, p> mult(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
@@ -226,12 +227,12 @@ static Matrix<T, n, p> mult(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
 
 
  /**
- * \brief  Multiplication matrix and scalar
+ * @brief  Multiplication matrix and scalar
  * 
- * \param [in] Matrix A with i, j size
- * \param [in] Scalar data with the same type as matrix A
+ * @param [in] Matrix A with i, j size
+ * @param [in] Scalar data with the same type as matrix A
  * 
- * \return Result of multiplication each element of A matrix and scalar data
+ * @return Result of multiplication each element of A matrix and scalar data
  */
 template<typename T, std::size_t i, std::size_t j>
 static Matrix<T, i, j> mult(const Matrix<T, i, j>& A, const T scalar)
@@ -250,12 +251,12 @@ static Matrix<T, i, j> mult(const Matrix<T, i, j>& A, const T scalar)
 
 
  /**
- * \brief Divide matrix and scalar
+ * @brief Divide matrix and scalar
  * 
- * \param [in] Matrix A with i, j size
- * \param [in] Scalar data with the same type as matrix A
+ * @param [in] Matrix A with i, j size
+ * @param [in] Scalar data with the same type as matrix A
  * 
- * \return Result of divide each element of A matrix and scalar data
+ * @return Result of divide each element of A matrix and scalar data
  */
 template<typename T, std::size_t n, std::size_t m>
 static Matrix<T, n, m> div(const Matrix<T, n, m>& A, const T scalar)
@@ -277,12 +278,12 @@ static Matrix<T, n, m> div(const Matrix<T, n, m>& A, const T scalar)
 
 
 /**
- * \brief Overloaded '+' operator of sum two matrices
+ * @brief Overloaded '+' operator of sum two matrices
  *
- * \param [in] Matrix A ixj
- * \param [in] Matrix B ixj
+ * @param [in] Matrix A ixj
+ * @param [in] Matrix B ixj
  * 
- * \return Result of sum matrix A and B
+ * @return Result of sum matrix A and B
  */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> operator+(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
@@ -292,12 +293,12 @@ Matrix<T, i, j> operator+(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
 
 
 /**
- * \brief Overloaded '+' operator for add matrix and scalar
+ * @brief Overloaded '+' operator for add matrix and scalar
  *
- * \param [in] Matrix A ixj
- * \param [in] Scalar data
+ * @param [in] Matrix A ixj
+ * @param [in] Scalar data
  * 
- * \return Result of sum matrix A and scalar
+ * @return Result of sum matrix A and scalar
  */
 template<typename T,  std::size_t i, std::size_t j>
 Matrix<T, i, j> operator+(const Matrix<T, i, j>& A, const T scalar)
@@ -307,12 +308,12 @@ Matrix<T, i, j> operator+(const Matrix<T, i, j>& A, const T scalar)
 
 
 /**
- * \brief Overloaded '+' operator for add scalar and matrix
+ * @brief Overloaded '+' operator for add scalar and matrix
  *
- * \param [in] Scalar data
- * \param [in] Matrix A ixj
+ * @param [in] Scalar data
+ * @param [in] Matrix A ixj
  * 
- * \return Result of sum scalar and matrix A
+ * @return Result of sum scalar and matrix A
  */
 template<typename T,  std::size_t i, std::size_t j>
 Matrix<T, i, j> operator+(const T scalar, const Matrix<T, i, j>& A)
@@ -322,12 +323,12 @@ Matrix<T, i, j> operator+(const T scalar, const Matrix<T, i, j>& A)
 
 
 /**
- * \brief Overloaded '-' operator for substraction two matrices
+ * @brief Overloaded '-' operator for substraction two matrices
  *
- * \param [in] Matrix A ixj
- * \param [in] Matrix B ixj
+ * @param [in] Matrix A ixj
+ * @param [in] Matrix B ixj
  * 
- * \return Result of substraction matrix A and B
+ * @return Result of substraction matrix A and B
  */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
@@ -337,12 +338,12 @@ Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B)
 
 
 /**
- * \brief Overloaded '-' operator for substraction matrix and scalar
+ * @brief Overloaded '-' operator for substraction matrix and scalar
  *
- * \param [in] Matrix A ixj
- * \param [in] Scalar data
+ * @param [in] Matrix A ixj
+ * @param [in] Scalar data
  * 
- * \return Result of substraction matrix A and scalar data
+ * @return Result of substraction matrix A and scalar data
  */
 template<typename T,  std::size_t i, std::size_t j>
 Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const T scalar)
@@ -352,12 +353,12 @@ Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const T scalar)
 
 
 /**
- * \brief Overloaded '*' operator for multiply two matrices
+ * @brief Overloaded '*' operator for multiply two matrices
  *
- * \param [in] Matrix A
- * \param [in] Matrix B
+ * @param [in] Matrix A
+ * @param [in] Matrix B
  * 
- * \return Result of multiplication matrix A and B
+ * @return Result of multiplication matrix A and B
  */
 template<typename T,  std::size_t n, std::size_t m, std::size_t p>
 Matrix<T, n, p> operator*(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
@@ -367,12 +368,12 @@ Matrix<T, n, p> operator*(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
 
 
 /**
- * \brief Overloaded '*' operator for multiply matrix and scalar
+ * @brief Overloaded '*' operator for multiply matrix and scalar
  *
- * \param [in] Matrix A ixj
- * \param [in] Scalar data
+ * @param [in] Matrix A ixj
+ * @param [in] Scalar data
  * 
- * \return Result of substraction matrix A and scalar
+ * @return Result of substraction matrix A and scalar
  */
 template<typename T,  std::size_t i, std::size_t j>
 Matrix<T, i, j> operator*(const Matrix<T, i, j>& A, const T scalar)
@@ -382,12 +383,12 @@ Matrix<T, i, j> operator*(const Matrix<T, i, j>& A, const T scalar)
 
 
 /**
- * \brief Overloaded '*' operator for multiply scalar and matrix
+ * @brief Overloaded '*' operator for multiply scalar and matrix
  *
- * \param [in] Scalar data
- * \param [in] Matrix A ixj
+ * @param [in] Scalar data
+ * @param [in] Matrix A ixj
  * 
- * \return Result of substraction scalar and matrix A
+ * @return Result of substraction scalar and matrix A
  */
 template<typename T,  std::size_t i, std::size_t j>
 Matrix<T, i, j> operator*(const T scalar, const Matrix<T, i, j>& A)
@@ -397,12 +398,12 @@ Matrix<T, i, j> operator*(const T scalar, const Matrix<T, i, j>& A)
 
 
 /**
- * \brief Overloaded '/' operator for divide matrix and scalar
+ * @brief Overloaded '/' operator for divide matrix and scalar
  *
- * \param [in] Matrix A ixj
- * \param [in] Scalar data
+ * @param [in] Matrix A ixj
+ * @param [in] Scalar data
  *
- * \retirn Result of divide matrix A and scalar
+ * @retirn Result of divide matrix A and scalar
  */
 template<typename T,  std::size_t i, std::size_t j>
 Matrix<T, i, j> operator/(const Matrix<T, i, j>& A, T scalar)
@@ -412,13 +413,13 @@ Matrix<T, i, j> operator/(const Matrix<T, i, j>& A, T scalar)
 
 
 /**
- * \brief LU decomposition
+ * @brief LU decomposition
  * 
  * Usage: The result of function is pair of matrices where L matrix is first 
  *        element of pair, the second element is U matrix
- * \param [in] Square Matrix A
+ * @param [in] Square Matrix A
  * 
- * \return Two matrices L and U
+ * @return Two matrices L and U
  */
 template<typename T, std::size_t n>
 std::pair<Matrix<T,n,n>, Matrix<T,n,n>>lu(const Matrix<T,n,n>& A)
@@ -457,11 +458,11 @@ std::pair<Matrix<T,n,n>, Matrix<T,n,n>>lu(const Matrix<T,n,n>& A)
 
 
 /**
- * \brief Determinant of matrix 1x1
+ * @brief Determinant of matrix 1x1
  *
- * \param [in] Square Matrix A with 1x1 size
+ * @param [in] Square Matrix A with 1x1 size
  * 
- * \return Determinant of matrix A
+ * @return Determinant of matrix A
  */
 template<typename T>
 T det(const Matrix<T, 1, 1>& A)
@@ -469,12 +470,13 @@ T det(const Matrix<T, 1, 1>& A)
   return A[0][0]; 
 }
 
+
 /**
- * \brief Determinant of matrix 2x2
+ * @brief Determinant of matrix 2x2
  *
- * \param [in] Square Matrix A with 2x2 size
+ * @param [in] Square Matrix A with 2x2 size
  * 
- * \return Determinant of matrix A
+ * @return Determinant of matrix A
  */
 template<typename T>
 T det(const Matrix<T, 2, 2>& A)
@@ -485,12 +487,13 @@ T det(const Matrix<T, 2, 2>& A)
   return a*d - b*c; 
 }
 
+
 /**
- * \brief Determinant of matrix 3x3
+ * @brief Determinant of matrix 3x3
  *
- * \param [in] Square Matrix A with 3x3 size
+ * @param [in] Square Matrix A with 3x3 size
  * 
- * \return Determinant of matrix A
+ * @return Determinant of matrix A
  */
 template<typename T>
 T det(const Matrix<T, 3, 3>& A)
@@ -504,11 +507,11 @@ T det(const Matrix<T, 3, 3>& A)
 
 
 /**
- * \brief Determinant of matrix nxn
+ * @brief Determinant of matrix nxn
  *
- * \param [in] Square Matrix A with nxn size
+ * @param [in] Square Matrix A with nxn size
  * 
- * \return Determinant of matrix A
+ * @return Determinant of matrix A
  */
 template<typename T, std::size_t n>
 T det(const Matrix<T, n, n>& A)
@@ -522,11 +525,11 @@ T det(const Matrix<T, n, n>& A)
 
 
 /**
- * \brief Minor of A - A with crossed-out i-th column and j-th row
+ * @brief Minor of A - A with crossed-out i-th column and j-th row
  *
- * \param [in] Square Matrix A with nxn size
+ * @param [in] Square Matrix A with nxn size
  * 
- * \return Minor of A matrix
+ * @return Minor of A matrix
  */
 template<typename T, std::size_t n>
 Matrix<T, (n-1), (n-1)> getminor(const Matrix<T, n, n>& A, std::size_t i, std::size_t j)
@@ -554,11 +557,11 @@ Matrix<T, (n-1), (n-1)> getminor(const Matrix<T, n, n>& A, std::size_t i, std::s
 
 
 /**
- * \brief Transpose of matrix nxm
+ * @brief Transpose of matrix nxm
  *
- * \param [in] Matrix A with nxm size
+ * @param [in] Matrix A with nxm size
  * 
- * \return Transpose of matrix A
+ * @return Transpose of matrix A
  */
 template<typename T, std::size_t n, std::size_t m>
 Matrix<T, m, n> trans(const Matrix<T, n, m>& A)
@@ -577,11 +580,11 @@ Matrix<T, m, n> trans(const Matrix<T, n, m>& A)
 
 
 /**
- * \brief Inverse of matrix 1x1
+ * @brief Inverse of matrix 1x1
  *
- * \param [in] Square Matrix A with 1x1 size
+ * @param [in] Square Matrix A with 1x1 size
  * 
- * \return Inverse of matrix A
+ * @return Inverse of matrix A
  */
 template<typename T>
 Matrix<T, 1, 1> inv(const Matrix<T, 1, 1>& A)
@@ -591,11 +594,11 @@ Matrix<T, 1, 1> inv(const Matrix<T, 1, 1>& A)
 
 
 /**
- * \brief Inverse of matrix 2x2
+ * @brief Inverse of matrix 2x2
  *
- * \param [in] Square Matrix A with 2x2 size
+ * @param [in] Square Matrix A with 2x2 size
  * 
- * \return Inverse of matrix A
+ * @return Inverse of matrix A
  *         error with the A is zero
  */
 template<typename T>
@@ -615,11 +618,11 @@ Matrix<T, 2, 2> inv(const Matrix<T, 2, 2>& A)
 
 
 /**
- * \brief Inverse of matrix 3x3
+ * @brief Inverse of matrix 3x3
  *
- * \param [in] Square Matrix A with 3x3 size
+ * @param [in] Square Matrix A with 3x3 size
  * 
- * \return Inverse of matrix A
+ * @return Inverse of matrix A
  *         error with the A is zero
  */
 template<typename T>
@@ -644,16 +647,14 @@ Matrix<T, 3, 3> inv(const Matrix<T, 3, 3>& A)
 }
 
 template<typename T,  std::size_t n>
-Matrix<T, n,(n+n)> concatenateHorizontally(
-  const Matrix<T, n, n>& A,
-  const Matrix<T, n, n>& B);
+Matrix<T, n,(n+n)> concatenateH(const Matrix<T, n, n>& A, const Matrix<T, n, n>& B);
 
 /**
- * \brief Inverse of matrix nxn
+ * @brief Inverse of matrix nxn
  *
- * \param [in] Square Matrix A with nxn size
+ * @param [in] Square Matrix A with nxn size
  * 
- * \return Inverse of matrix A
+ * @return Inverse of matrix A
  */
 template<typename T, std::size_t n>
 Matrix<T, n, n> inv(const Matrix<T, n, n>& A)
@@ -672,11 +673,11 @@ Matrix<T, n, n> inv(const Matrix<T, n, n>& A)
 
 
 /**
- * \brief Check if the matrix A is identity
+ * @brief Check if the matrix A is identity
  *
- * \param [in] Matrix A with nxn size
+ * @param [in] Matrix A with nxn size
  * 
- * \return true - if A matrix is identity
+ * @return true - if A matrix is identity
  *         false - if A matrix is not identity
  */
 template<typename T, std::size_t n>
@@ -689,12 +690,12 @@ bool isIdentity(const Matrix<T, n, n>& A)
 
 
 /**
- * \brief Power of A matrix to p
+ * @brief Power of A matrix to p
  *
- * \param [in] Matrix A with nxn size
- * \param [in] Power number
+ * @param [in] Matrix A with nxn size
+ * @param [in] Power number
  * 
- * \return Matrix A power by p
+ * @return Matrix A power by p
  */
 template<typename T, typename P, std::size_t n>
 Matrix<T, n, n> pow(Matrix<T, n, n>A, P p)
@@ -733,17 +734,16 @@ Matrix<T, n, n> pow(Matrix<T, n, n>A, P p)
 
 
 /**
- * \brief Absolut value of matrix
+ * @brief Absolut value of matrix
  *
- * \param [in] Matrix A with ixj size
+ * @param [in] Matrix A with ixj size
  * 
- * \return Matrix A which is result of absolut each element of matrix
+ * @return Matrix A which is result of absolut each element of matrix
  */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> abs(const Matrix<T, i, j>& A)
 {
   Matrix<T, i, j> absA;
-
   for (std::size_t it = 0; it < i; it++)
   {
     for (std::size_t jt = 0; jt < j; jt++)
@@ -756,10 +756,10 @@ Matrix<T, i, j> abs(const Matrix<T, i, j>& A)
 
 
 /**
- * \ Compare two matrices with the same size, specific error
- * \param [in] Matrix A ixj
- * \param [in] Matrix B ixj
- * \param [in] error
+ * @ Compare two matrices with the same size, specific error
+ * @param [in] Matrix A ixj
+ * @param [in] Matrix B ixj
+ * @param [in] error
  *
  * return true if compare, otherwise false
  */
@@ -772,12 +772,12 @@ bool compare(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B, T epsilon)
 
 
  /**
- * \brief Multiplication two matrixec using Strassen algorithm
+ * @brief Multiplication two matrixec using Strassen algorithm
  * 
- * \param [in] Matrix A 2x2
- * \param [in] Matrix B 2x2
+ * @param [in] Matrix A 2x2
+ * @param [in] Matrix B 2x2
  * 
- * \return Result of multiplication matrix A and B
+ * @return Result of multiplication matrix A and B
  */
 template<typename T>
 Matrix<T, 2, 2> strassen(const Matrix<T, 2, 2>& A, const Matrix<T, 2, 2>& B)
@@ -801,17 +801,18 @@ Matrix<T, 2, 2> strassen(const Matrix<T, 2, 2>& A, const Matrix<T, 2, 2>& B)
 }
 
 /**
- * \brief
+ * @brief
  *
- * \param [in] Matrix A ixj
- * \param [in] Matrix V ixj
+ * @param [in] Matrix A ixj
+ * @param [in] Matrix V ixj
  *
- * \return 
+ * @return 
  */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
 {
   Matrix<T, i, j> result{};
+
   for(std::size_t it = 1; it < i-1; it++)
   {
     for(std::size_t jt = 1; jt < j-1; jt++)
@@ -827,63 +828,65 @@ Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
       kernel[2][2] * A[it+1][jt+1];
     }
   }
+
   return result;
 }
 
+
 /**
- * \brief Concatenate two squared matrices
+ * @brief Concatenate two squared matrices
  * 
- * \param [in] Matrix A nxn
- * \param [in] Matrix B nxn
+ * @param [in] Matrix A nxn
+ * @param [in] Matrix B nxn
  *
- * \return first of pair is matrix joined vertically, second horizontally 
+ * @return first of pair is matrix joined vertically, second horizontally 
  */
 template<typename T,  std::size_t n>
-std::pair<Matrix<T, (n+n), n>,Matrix<T, n, (n+n)>> concatenate(
-  const Matrix<T, n, n>& A,
-  const Matrix<T, n, n>& B)
+std::pair<Matrix<T, (n+n), n>,Matrix<T, n, (n+n)>> concatenate(const Matrix<T, n, n>& A, const Matrix<T, n, n>& B)
 {
   std::pair<Matrix<T, (n+n), n>, Matrix<T, n, (n+n)>> result{};
-  for (std::size_t it = 0; it < n; it++)
+  for (std::size_t i = 0; i < n; i++)
   {
-    for (std::size_t jt = 0; jt < n; jt++)
+    for (std::size_t j = 0; j < n; j++)
     {
-      result.first[it][jt] = A[it][jt];
+      result.first[i][j] = A[i][j];
     }
   }
-  for (std::size_t it = n; it < n+n; it++)
+
+  for (std::size_t i = n; i < n+n; i++)
   {
-    for (std::size_t jt = 0; jt < n; jt++)
+    for (std::size_t j = 0; j < n; j++)
     {
-      result.first[it][jt] = B[it-n][jt];
+      result.first[i][j] = B[i-n][j];
     }
   }
-  for (std::size_t it = 0; it < n; it++)
+
+  for (std::size_t i = 0; i < n; i++)
   {
-    for (std::size_t jt = 0; jt < n; jt++)
+    for (std::size_t j = 0; j < n; j++)
     {
-      result.second[it][jt] = A[it][jt];
+      result.second[i][j] = A[i][j];
     }
-    for (std::size_t jt = n; jt < n+n; jt++)
+    for (std::size_t j = n; j < n+n; j++)
     {
-      result.second[it][jt] = A[it][jt-n];
+      result.second[i][j] = A[i][j-n];
     }
   }
+
   return result;
 }
 
+
 /**
- * \brief Concatenate two matrices vertically
+ * @brief Concatenate two matrices vertically
  * 
- * \param [in] Matrix A i1xj
- * \param [in] Matrix B i2xj
+ * @param [in] Matrix A i1xj
+ * @param [in] Matrix B i2xj
  *
- * \return matrix joined vertically - size: (i1+i2)xj
+ * @return matrix joined vertically - size: (i1+i2)xj
  */
 template<typename T,  std::size_t i1, std::size_t i2, std::size_t j>
-Matrix<T, (i1+i2), j> concatenate(
-  const Matrix<T, i1, j>& A,
-  const Matrix<T, i2, j>& B)
+Matrix<T, (i1+i2), j> concatenate(const Matrix<T, i1, j>& A, const Matrix<T, i2, j>& B)
 {
   Matrix<T, (i1+i2), j> result{};
   for (std::size_t it = 0; it < i1; it++)
@@ -903,18 +906,17 @@ Matrix<T, (i1+i2), j> concatenate(
   return result;
 }
 
+
 /**
- * \brief Concatenate two matrices horizontally
+ * @brief Concatenate two matrices horizontally
  * 
- * \param [in] Matrix A ixj1
- * \param [in] Matrix B ixj2
+ * @param [in] Matrix A ixj1
+ * @param [in] Matrix B ixj2
  *
- * \return matrix joined horizontally - size: ix(j1+j2)
+ * @return matrix joined horizontally - size: ix(j1+j2)
  */
 template<typename T,  std::size_t i, std::size_t j1, std::size_t j2>
-Matrix<T, i, (j1+j2)> concatenate(
-  const Matrix<T, i, j1>& A,
-  const Matrix<T, i, j2>& B)
+Matrix<T, i, (j1+j2)> concatenate(const Matrix<T, i, j1>& A, const Matrix<T, i, j2>& B)
 {
   Matrix<T, i, (j1+j2)> result{};
   for (std::size_t it = 0; it < i; it++)
@@ -931,18 +933,17 @@ Matrix<T, i, (j1+j2)> concatenate(
   return result;
 }
 
+
 /**
- * \brief Concatenate two square matrices vertically
+ * @brief Concatenate two square matrices vertically
  * 
- * \param [in] Matrix A nxn
- * \param [in] Matrix B nxn
+ * @param [in] Matrix A nxn
+ * @param [in] Matrix B nxn
  *
- * \return matrix joined vertically - size: (2n)xn
+ * @return matrix joined vertically - size: (2n)xn
  */
 template<typename T,  std::size_t n>
-Matrix<T, (n+n), n> concatenateVertically(
-  const Matrix<T, n, n>& A,
-  const Matrix<T, n, n>& B)
+Matrix<T, (n+n), n> concatenateV(const Matrix<T, n, n>& A, const Matrix<T, n, n>& B)
 {
   Matrix<T, (n+n), n> result{};
   for (std::size_t it = 0; it < n; it++)
@@ -962,18 +963,17 @@ Matrix<T, (n+n), n> concatenateVertically(
   return result;
 }
 
+
 /**
- * \brief Concatenate two square matrices horizontally
+ * @brief Concatenate two square matrices horizontally
  * 
- * \param [in] Matrix A nxn
- * \param [in] Matrix B nxn
+ * @param [in] Matrix A nxn
+ * @param [in] Matrix B nxn
  *
- * \return matrix joined horizontally - size: nx(2n)
+ * @return matrix joined horizontally - size: nx(2n)
  */
 template<typename T,  std::size_t n>
-Matrix<T, n,(n+n)> concatenateHorizontally(
-  const Matrix<T, n, n>& A,
-  const Matrix<T, n, n>& B)
+Matrix<T, n,(n+n)> concatenateH(const Matrix<T, n, n>& A, const Matrix<T, n, n>& B)
 {
   Matrix<T, n, (n+n)> result{};
   for (std::size_t it = 0; it < n; it++)
@@ -990,12 +990,13 @@ Matrix<T, n,(n+n)> concatenateHorizontally(
   return result;
 }
 
-/***
- * \brief Mean
+
+/**
+ * @brief Mean
  *
- * \param [in] Matrix A nxn
+ * @param [in] Matrix A nxn
  *
- * \return mean value of type T
+ * @return mean value of type T
  */
 template<typename T,  std::size_t i, std::size_t j>
 T mean(const Matrix<T, i, j>& A)
@@ -1011,12 +1012,13 @@ T mean(const Matrix<T, i, j>& A)
   return (result / (i*j));
 }
 
-/***
- * \brief median
+
+/**
+ * @brief median
  *
- * \param [in] Matrix A nxn
+ * @param [in] Matrix A nxn
  *
- * \return median
+ * @return median
  */
 template<typename T,  std::size_t i, std::size_t j>
 T median(const Matrix<T, i, j>& A)
@@ -1042,12 +1044,13 @@ T median(const Matrix<T, i, j>& A)
  return A[0][0];
 }
 
-/***
- * \brief Variance
+
+/**
+ * @brief Variance
  *
- * \param [in] Matrix A nxn
+ * @param [in] Matrix A nxn
  *
- * \return Variance
+ * @return Variance
  */
 template<typename T,  std::size_t i, std::size_t j>
 T var(const Matrix<T, i, j>& A)
@@ -1064,17 +1067,65 @@ T var(const Matrix<T, i, j>& A)
   return (result / (i*j));
 }
 
-/***
- * \brief Standatrd deviation
+
+/**
+ * @brief Standatrd deviation
  *
- * \param [in] Matrix A nxn
+ * @param [in] Matrix A nxn
  *
- * \return Standard deviation
+ * @return Standard deviation
  */
 template<typename T,  std::size_t i, std::size_t j>
 T stddev(const Matrix<T, i, j>& A)
 {
   return sqrt(var(A));
+}
+
+
+/**
+ * @brief Histogram
+ *
+ * @param [in] Matrix A ixj
+ *
+ * @return std::map with unique value of matrix A as key value and
+ *         quantity of that unique value as mapped value.
+ */
+template<typename T, std::size_t i, std::size_t j>
+std::map<T,std::size_t> histogram(const Matrix<T, i, j>& A)
+{
+  std::map<T,std::size_t> histogram{};
+  for (std::size_t it = 0; it < i; it++)
+  {
+    for (std::size_t jt = 0; jt < j; jt++)
+    {
+      histogram[A[it][jt]]++;
+    }
+  }
+  return histogram;
+}
+
+
+/**
+ * @brief Cumulative histogram //TODO: Think about better name of this fun.
+ *
+ * @param [in] Matrix A ixj
+ *
+ * @return std::map with unique value of matrix A as key value and as mapped
+ *     value quantity of values that are not greater than unique value.
+ */
+template<typename T, std::size_t i, std::size_t j>
+std::map<T,std::size_t> cumulative_histogram(const Matrix<T, i, j>& A)
+{
+  std::map<T,std::size_t> result{};
+  std::size_t cumul_sum{};
+  const auto histA = histogram(A);
+  for (const auto &p : histA) 
+  {
+    cumul_sum += p.second;
+    result[p.first] = cumul_sum;
+  }
+  
+  return result;
 }
 
 #endif /* MATRIX_HPP_ */
