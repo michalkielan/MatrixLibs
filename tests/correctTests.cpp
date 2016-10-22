@@ -614,7 +614,7 @@ TEST_F(MatrixTest, concatenate)
    10, 12,
    15, 13};
 
-  auto EF = concatenateVertically(E,F);
+  auto EF = concatenateV(E,F);
   ASSERT_TRUE(compare(expected_EF, EF, 0.0001f));
 
   const Matrix<float, 2, 2> G =
@@ -629,7 +629,7 @@ TEST_F(MatrixTest, concatenate)
   { 4, 3, 10, 12,
     6, 3, 15, 13};
 
-  auto GH = concatenateHorizontally(G,H);
+  auto GH = concatenateH(G,H);
   ASSERT_TRUE(compare(expected_GH, GH, 0.0001f));
 
   const Matrix<float, 2, 2> I =
@@ -705,6 +705,27 @@ TEST_F(MatrixTest, stats)
   ASSERT_TRUE((median(B) - 5)       < eps);
   ASSERT_TRUE((var(B)    - 6)       < eps);
   ASSERT_TRUE((stddev(B) - sqrt(6)) < eps);
+}
+
+TEST_F(MatrixTest, histogram)
+{
+  const Matrix<float, 3, 3> A =
+  { 1, 2, 2,
+    4, 4, 2,
+    7, 8, 4 };
+  auto histA = histogram(A);
+
+  #if HISTOGRAM_DEBUG
+    for (const auto &p : histA) {
+      std::cout << p.first << " " << p.second << std::endl;
+    }
+  #endif // HISTOGRAM_DEBUG
+
+  ASSERT_EQ(histA[1],1);
+  ASSERT_EQ(histA[2],3);
+  ASSERT_EQ(histA[4],3);
+  ASSERT_EQ(histA[7],1);
+  ASSERT_EQ(histA[8],1);
 }
 
 int main(int argc, char* argv[])
