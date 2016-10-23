@@ -1,1 +1,1 @@
-Small matrix library, written in C++14 
+Small matrix library, written in C++11 
