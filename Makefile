@@ -41,7 +41,7 @@ CXXFLAGS+=-flto
 CXXFLAGS+=$(DBG)
 CXXFLAGS+=$(OPTIMIZATION)
 
-INC+=.
+INC+=./inc
 SRC+=./tests/
 
 CORRECT_TEST=correctTests
