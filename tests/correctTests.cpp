@@ -454,6 +454,66 @@ TEST_F(MatrixTest, pow)
    ASSERT_EQ( (invA*invA*invA*invA*invA), pow(A,-5));
 }
 
+
+TEST_F(MatrixTest, LU_5x5)
+{
+  //TODO: tests
+  ASSERT_TRUE(true);
+}
+
+TEST_F(MatrixTest, LU_4x4)
+{
+  const Matrix<float, 4, 4> A =
+  { 1,  2, 3, 4,  
+    5,  6, 7, 8,  
+    9,  1, 3, 5,  
+    -4, 0, 2, 4};
+                
+   const Matrix<float, 4, 4> U  =    
+   {  9,    1,            3,         5,         
+      0,    5.4444444,    5.3333333, 5.2222222, 
+      0,    0,            2.8979592, 5.7959184, 
+      0,    0,            0,         0  };
+
+   const Matrix<float, 4, 4> L  =      
+   {  0.1111111,   0.3469388,   0.2816901, 1,  
+      0.5555556,   1,           0,         0,  
+      1,           0,           0,         0,  
+    - 0.4444444,   0.0816327,   1,         0};
+
+  auto LU = lu(A);
+
+  ASSERT_TRUE(compare(L, LU.first,  0.001f));
+  ASSERT_TRUE(compare(U, LU.second, 0.001f));
+
+ const Matrix<float, 4, 4> Ap =
+  { 1, 2,  3,  4,
+    5, 6,  7,  8,
+    9, 10, 2,  2,
+    2, 1,  -4, 0 };
+
+  const Matrix<float, 4, 4> Up =
+  { 9,    10,          2,           2,         
+    0,  - 1.2222222,  - 4.4444444,  - 0.4444444,  
+    0,    0,           4.2727273,    6.7272727,  
+    0,    0,           0,           4.1702128 };
+
+  const Matrix<float, 4, 4> Lp = 
+  { 0.1111111,  -0.7272727, -0.1063830, 1,  
+    0.5555556, -0.3636364,   1,         0,  
+    1,           0,          0,         0,  
+    0.2222222,   1,          0,         0};
+
+  auto LUp = lu(Ap);
+
+  print(LUp.first);
+  print(LUp.second);
+
+  ASSERT_TRUE(compare(Lp, LUp.first,  0.001f));
+  ASSERT_TRUE(compare(Up, LUp.second, 0.001f));
+}
+
+
 TEST_F(MatrixTest, LU_3x3)
 {
   const Matrix<float, 3, 3> A =
