@@ -145,11 +145,22 @@ T det(Matrix<T, n, n> data)
   T factor{1};
   std::size_t pivot{0};
 
+  auto prod = [&]()
+  {
+    T prod{1};
+
+    for (std::size_t i = 0; i < n; ++i)
+    {
+      prod *= tmp[i][i];
+    }
+    return prod / factor;
+  };
+
   for (size_t r = 0; r < n; ++r)
   {
     if (n <= pivot)
     {
-      goto end;
+      return prod();
     }
 
     /* ensure the pivot entry is non-zero by swapping rows */
@@ -164,7 +175,7 @@ T det(Matrix<T, n, n> data)
         ++pivot;
         if (n == pivot)
         {
-          goto end;
+          return prod();
         }
       }
     }
@@ -191,15 +202,8 @@ T det(Matrix<T, n, n> data)
     pivot++;
   }
 
-  end:
-  T prod{1};
+  return prod();
 
-  for (std::size_t i = 0; i < n; ++i)
-  {
-    prod *= tmp[i][i];
-  }
-
-  return prod / factor;
 }
 
 
