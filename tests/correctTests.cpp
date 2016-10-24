@@ -274,44 +274,44 @@ TEST_F(MatrixTest, identity)
   ASSERT_FALSE(res);
 }
 
-//TEST_F(MatrixTest, inv)
-//{
-//  const Matrix<float, 2, 2> A =
-//  { 1, 2,
-//    0, 1 };
-//
-//  const Matrix<float, 2, 2> invA =
-//  { 1, -2,
-//    0, 1 };
-//
-//  ASSERT_EQ(inv(A), invA);
-//
-//  const Matrix<float, 3, 3> B =
-//  { -2, 5, 1,
-//     3, 0, 1,
-//     1, 1, 2 };
-//
-//  const Matrix<float, 3, 3> invB =
-//  {  0.05,  0.45, -0.25,
-//     0.25,  0.25, -0.25,
-//    -0.15, -0.35,  0.55 };
-//
-//  ASSERT_TRUE(compare(inv(B), invB, 0.01f));
-//
-//  const Matrix<float, 4, 4> C =
-//  { 1,  2,  3,  4,
-//    2,  3,  1,  2,
-//    1,  1,  1, -1,
-//    1,  0, -2, -6};
-//
-//  const Matrix<float, 4, 4> invC =
-//  { 22, -6, -26,  17,
-//   -17,  5,  20, -13,
-//    -1,  0,   2,  -1,
-//     4, -1,  -5,   3};
-//
-//  ASSERT_TRUE(compare(inv(C), invC, 0.01f));
-//}
+TEST_F(MatrixTest, inv)
+{
+  const Matrix<float, 2, 2> A =
+  { 1, 2,
+    0, 1 };
+
+  const Matrix<float, 2, 2> invA =
+  { 1, -2,
+    0, 1 };
+
+  ASSERT_EQ(inv(A), invA);
+
+  const Matrix<float, 3, 3> B =
+  { -2, 5, 1,
+     3, 0, 1,
+     1, 1, 2 };
+
+  const Matrix<float, 3, 3> invB =
+  {  0.05,  0.45, -0.25,
+     0.25,  0.25, -0.25,
+    -0.15, -0.35,  0.55 };
+
+  ASSERT_TRUE(compare(inv(B), invB, 0.01f));
+
+  const Matrix<float, 4, 4> C =
+  { 1,  2,  3,  4,
+    2,  3,  1,  2,
+    1,  1,  1, -1,
+    1,  0, -2, -6};
+
+  const Matrix<float, 4, 4> invC =
+  { 22, -6, -26,  17,
+   -17,  5,  20, -13,
+    -1,  0,   2,  -1,
+     4, -1,  -5,   3};
+
+  ASSERT_TRUE(compare(inv(C), invC, 0.01f));
+}
 
 TEST_F(MatrixTest, trans_square_matrix)
 {
