@@ -152,7 +152,7 @@ T det(Matrix<T, n, n> data)
     return prod / factor;
   };
 
-  for (size_t r = 0; r < n; ++r)
+  for (std::size_t r = 0; r < n; ++r)
   {
     if (n <= pivot)
     {
