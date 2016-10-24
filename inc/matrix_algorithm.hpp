@@ -116,8 +116,6 @@ T det(const Matrix<T, 3, 3>& A)
 template<typename T, std::size_t n>
 void swap_rows(Matrix<T, n, n>& data, size_t a, size_t b)
 {
-  print(data);
-
   if (a != b)
   {
     for (size_t k = 0; k < n; ++k)
@@ -125,8 +123,6 @@ void swap_rows(Matrix<T, n, n>& data, size_t a, size_t b)
       std::swap(data[a], data[b]);
     }
   }
-
-  print(data);
 }
 
 
@@ -145,14 +141,24 @@ T det(Matrix<T, n, n> data)
   T factor{1};
   std::size_t pivot{0};
 
+  auto prod = [&]()
+  {
+    T prod{1};
+
+    for (std::size_t i = 0; i < n; ++i)
+    {
+      prod *= tmp[i][i];
+    }
+    return prod / factor;
+  };
+
   for (size_t r = 0; r < n; ++r)
   {
     if (n <= pivot)
     {
-      goto end;
+      return prod();
     }
 
-    /* ensure the pivot entry is non-zero by swapping rows */
     std::size_t i = r;
 
     while (tmp[i][pivot] == 0)
@@ -164,18 +170,17 @@ T det(Matrix<T, n, n> data)
         ++pivot;
         if (n == pivot)
         {
-          goto end;
+          return prod();
         }
       }
     }
 
     if (i != r)
-    { /* don't adjust the factor if don't need to swap */
+    {
       swap_rows(tmp, i, r);
       factor *= -1;
     }
 
-    /* apply row operations to zero out all entries beneath the pivot */
     for (std::size_t i = pivot + 1; i < n; ++i)
     {
       if (i != r)
@@ -191,15 +196,8 @@ T det(Matrix<T, n, n> data)
     pivot++;
   }
 
-  end:
-  T prod{1};
+  return prod();
 
-  for (std::size_t i = 0; i < n; ++i)
-  {
-    prod *= tmp[i][i];
-  }
-
-  return prod / factor;
 }
 
 
