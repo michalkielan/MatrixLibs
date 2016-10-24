@@ -3,6 +3,22 @@
 
 #include "matrix_basic_math.hpp"
 
+
+template<typename T, std::size_t I, std::size_t J>
+void print(const Matrix<T, I, J>& A)
+{
+  for (std::size_t i = 0; i < I; i++)
+  {
+    for (std::size_t j = 0; j < J; j++)
+    {
+      std::cout << A[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+}
+
+
+
 /**
  * @brief LU decomposition
  * 
@@ -58,7 +74,7 @@ std::pair<Matrix<T,n,n>, Matrix<T,n,n>>lu(const Matrix<T,n,n>& A)
 template<typename T>
 T det(const Matrix<T, 1, 1>& A)
 {
-  return A[0][0]; 
+  return A[0][0];
 }
 
 
@@ -66,7 +82,7 @@ T det(const Matrix<T, 1, 1>& A)
  * @brief Determinant of matrix 2x2
  *
  * @param [in] Square Matrix A with 2x2 size
- * 
+ *
  * @return Determinant of matrix A
  */
 template<typename T>
@@ -75,7 +91,7 @@ T det(const Matrix<T, 2, 2>& A)
   auto&& a = A[0][0]; auto&& b = A[0][1];
   auto&& c = A[1][0]; auto&& d = A[1][1];
 
-  return a*d - b*c; 
+  return a*d - b*c;
 }
 
 
@@ -97,21 +113,93 @@ T det(const Matrix<T, 3, 3>& A)
 }
 
 
+template<typename T, std::size_t n>
+void swap_rows(Matrix<T, n, n>& data, size_t a, size_t b)
+{
+  print(data);
+
+  if (a != b)
+  {
+    for (size_t k = 0; k < n; ++k)
+    {
+      std::swap(data[a], data[b]);
+    }
+  }
+
+  print(data);
+}
+
+
 /**
  * @brief Determinant of matrix nxn
  *
  * @param [in] Square Matrix A with nxn size
- * 
+ *
  * @return Determinant of matrix A
  */
 template<typename T, std::size_t n>
-T det(const Matrix<T, n, n>& A)
+T det(Matrix<T, n, n> data)
 {
-  // TODO do it using LU algorithm (faster)
-  // auto LU = lu(A);
-  // auto&& L = LU.first;
-  // auto&& U = LU.second;
-  return -1;
+  auto tmp = data;
+
+  T factor{1};
+  std::size_t pivot{0};
+
+  for (size_t r = 0; r < n; ++r)
+  {
+    if (n <= pivot)
+    {
+      goto end;
+    }
+
+    /* ensure the pivot entry is non-zero by swapping rows */
+    std::size_t i = r;
+
+    while (tmp[i][pivot] == 0)
+    {
+      ++i;
+      if (n == i)
+      {
+        i = r;
+        ++pivot;
+        if (n == pivot)
+        {
+          goto end;
+        }
+      }
+    }
+
+    if (i != r)
+    { /* don't adjust the factor if don't need to swap */
+      swap_rows(tmp, i, r);
+      factor *= -1;
+    }
+
+    /* apply row operations to zero out all entries beneath the pivot */
+    for (std::size_t i = pivot + 1; i < n; ++i)
+    {
+      if (i != r)
+      {
+        T val = tmp[i][pivot];
+        for (std::size_t j = pivot; j < n; ++j)
+        {
+          tmp[i][j] -= val * tmp[r][j] / tmp[r][pivot];
+        }
+
+      }
+    }
+    pivot++;
+  }
+
+  end:
+  T prod{1};
+
+  for (std::size_t i = 0; i < n; ++i)
+  {
+    prod *= tmp[i][i];
+  }
+
+  return prod / factor;
 }
 
 
