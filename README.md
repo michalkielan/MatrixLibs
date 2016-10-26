@@ -24,7 +24,7 @@ MatrixLibs is C++11 meta-programming, header-only, no-dynamic memory allocations
 * have fun
 
 Matrix object uses `std::array` from C++11, so the explicity type and the size of matrix is always necessary
-```
+```C++
 constexpr std::size_t n = 2;
 Matrix<float, n, n> A
 { 1, 2, 
