@@ -252,6 +252,19 @@ TEST_F(MatrixTest, det)
 
   ASSERT_EQ(static_cast<int>(det(C5)), -6040);
 
+  const Matrix<float, 9, 9> C9 =
+  {  1,    0,    2,    3,    5,    4,    1,    0,    1,
+     7,    6,  - 4,    0,    1,    6,    0,    0,    0,
+   - 1,  - 4,    0,    5,    1,    5,    4,    6,    2,
+     2,  - 4,    3,  - 5,    0,    0,    0,    0,  - 1,
+     1,    2,    5,  - 3,    0,    0,    0,    3,  - 3,
+     7,    6,  - 4,    0,    1,    6,    0,  - 1,    0,
+   - 1,  - 7,  - 2,    5,    1,    2,    4,    5,    1,
+     2,  - 4,    0,  - 5,  - 3,    0,    0,    0,    2,
+     1,    5,    3,  - 3,    0,    0,    0,    3,    1 };
+
+  ASSERT_EQ(static_cast<int>(det(C9)), static_cast<int>(89931.29104));
+
 }
 
 TEST_F(MatrixTest, identity)
