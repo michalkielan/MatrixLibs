@@ -3,7 +3,7 @@
 #############################################################
 
 # Compiler
-COMPILER=g++
+COMPILER=g++-6
 
 # C++ standard, ex. -std=c++0x, c++11, c++14; -std=gnu++11, gnu++14
 CPP_STD= -std=c++14 -std=gnu++14
@@ -41,7 +41,7 @@ CXXFLAGS+=-flto
 CXXFLAGS+=$(DBG)
 CXXFLAGS+=$(OPTIMIZATION)
 
-INC+=./inc
+INC+=./matrix
 SRC+=./tests/
 
 CORRECT_TEST=correctTests

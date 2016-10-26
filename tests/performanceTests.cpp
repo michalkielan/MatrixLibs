@@ -14,7 +14,7 @@
 #include <fstream>
 #include <gtest/gtest.h>
 
-#include "matrix.hpp"
+#include "../matrix/matrix.hpp"
 
 
 /**

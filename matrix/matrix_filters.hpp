@@ -1,7 +1,7 @@
 #ifndef MATRIX_FILTERS_HPP_
 #define MATRIX_FILTERS_HPP_
 
-#include "matrix_basic_math.hpp"
+#include "matrix_type.hpp"
 
 /**
  * @brief Mean
