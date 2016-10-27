@@ -1,5 +1,13 @@
 .cproject
 .project
 .settings/
-performanceTests
-correctTests
+performance
+correctness
+
+# Makefile
+Makefile
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
