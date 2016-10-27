@@ -9,7 +9,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 
-#include "../matrix/matrix.hpp"
+#include "matrix.hpp"
 
 
 class MatrixTest : public ::testing::Test
