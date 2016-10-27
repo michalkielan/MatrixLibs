@@ -1,6 +1,13 @@
 .cproject
 .project
 .settings/
-Makefile
 performance
 correctness
+
+# Makefile
+Makefile
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
