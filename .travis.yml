@@ -15,7 +15,7 @@ addons:
             - gcc-5
             - g++-5
             - libgtest-dev
-            - cmake "2.8.11"
+            - cmake=2.8.11
 
         coverity_scan:
             name: MatrixLibs
