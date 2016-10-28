@@ -17,10 +17,13 @@ void setRand(Matrix<T, i, j>& A)
   }
 }
 
-static void Multiply_500_500(benchmark::State& state) 
+
+
+template<std::size_t i, std::size_t j>
+static void multiply(benchmark::State& state) 
 {
-  Matrix<int, 500, 500> A;
-  Matrix<int, 500, 500> B;
+  Matrix<int, i, j> A;
+  Matrix<int, i, j> B;
 
   setRand(A);
   setRand(B);
@@ -31,22 +34,13 @@ static void Multiply_500_500(benchmark::State& state)
   }
 }
 
-static void Multiply_400_400(benchmark::State& state) 
-{
-  Matrix<int, 400, 400> A;
-  Matrix<int, 400, 400> B;
-
-  setRand(A);
-  setRand(B);
-
-  while (state.KeepRunning())
-  {
-    mult(A, B);
-  }
-}
-
-BENCHMARK(Multiply_400_400);
-BENCHMARK(Multiply_500_500);
+BENCHMARK_TEMPLATE(multiply, 100, 100);
+BENCHMARK_TEMPLATE(multiply, 200, 200);
+BENCHMARK_TEMPLATE(multiply, 300, 300);
+BENCHMARK_TEMPLATE(multiply, 400, 400);
+BENCHMARK_TEMPLATE(multiply, 500, 500);
+BENCHMARK_TEMPLATE(multiply, 600, 600);
+BENCHMARK_TEMPLATE(multiply, 700, 700);
 
 BENCHMARK_MAIN();
 
