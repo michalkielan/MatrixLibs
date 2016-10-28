@@ -11,12 +11,17 @@
 #include "matrix_type.hpp"
 
 /**
- * @brief
+ * @brief Convolution in two dimensions using kernel of size 3x3
+ *         It works as conv2 in Octave with 'same' parameter
  *
  * @param [in] Matrix A ixj
- * @param [in] Matrix V ixj
+ * @param [in] Matrix kenel 3x3
  *
- * @return
+ * @todo TODO Allow kernel to be square matrix of any siza
+ *       TODO Implement 'full' = full convolution that returns larger than ixj
+ *       TODO Implement 'valid' = returns smaller than ixj
+ *
+ * @return Returns the central part of the convolution (of size ixj like A)
  */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
