@@ -10,6 +10,10 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
+
  /**
  * @brief Divide matrix and scalar
  *
@@ -52,5 +56,6 @@ Matrix<T, i, j> operator/(const Matrix<T, i, j>& A, T scalar)
 }
 
 
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_DIV_HPP_ */

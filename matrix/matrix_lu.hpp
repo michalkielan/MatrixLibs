@@ -4,6 +4,10 @@
 #include "matrix_eye.hpp"
 #include "matrix_zeros.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief LU decomposition
  *
@@ -48,6 +52,7 @@ std::pair<Matrix<T,n,n>, Matrix<T,n,n>>lu(const Matrix<T,n,n>& A)
   return std::pair<Matrix<T,n,n>, Matrix<T,n,n>>{L, U};
 }
 
+} /* namespace mlib */
 
 
 #endif /* MATRIX_MATRIX_LU_HPP_ */

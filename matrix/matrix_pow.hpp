@@ -3,6 +3,10 @@
 
 #include "matrix_inv.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Power of A matrix to p
  *
@@ -46,5 +50,6 @@ Matrix<T, n, n> pow(Matrix<T, n, n> A, P p)
   }
 }
 
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_POW_HPP_ */

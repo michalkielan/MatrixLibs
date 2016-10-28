@@ -3,6 +3,9 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
 /**
  * @brief Histogram
  *
@@ -48,5 +51,8 @@ std::map<T, std::size_t> cumulative_histogram(const Matrix<T, i, j>& A)
   
   return result;
 }
+
+
+} /* namespace mlib */
 
 #endif // MATRIX_HISTOGRAM_HPP_

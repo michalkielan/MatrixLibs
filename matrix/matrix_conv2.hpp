@@ -10,6 +10,10 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Convolution in two dimensions using kernel of size 3x3
  *         It works as conv2 in Octave with 'same' parameter
@@ -46,6 +50,8 @@ Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
 
   return result;
 }
+
+} /* namespace mlib */
 
 
 #endif /* MATRIX_MATRIX_CONV2_HPP_ */

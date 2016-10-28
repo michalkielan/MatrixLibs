@@ -4,6 +4,10 @@
 #include "matrix_det.hpp"
 #include "matrix_trans.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Minor of A - A with crossed-out i-th column and j-th row
  *
@@ -125,5 +129,7 @@ Matrix<T, n, n> inv(const Matrix<T, n, n>& A)
   return trans(invA)/ detA;
 }
 
+
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_INV_HPP_ */

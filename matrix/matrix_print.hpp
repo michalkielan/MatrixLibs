@@ -10,7 +10,6 @@
 
 #include "matrix_type.hpp"
 
-
 /**
  * @brief Print matrix using output stream
  * @param [in] Matrix
@@ -22,6 +21,10 @@
 #ifdef PRINT_IOSTREAM_ENABLE
 
 #include <iostream>
+
+namespace mlib
+{
+
 
 template<typename T>
 static void print_num(T&& num)
@@ -36,6 +39,10 @@ static void print_endl()
 
 
 #else
+
+namespace mlib
+{
+
 
 template<typename T>
 static void print_num(T t)
@@ -66,6 +73,7 @@ void print(const Matrix<T, I, J>& A)
   }
 }
 
+} /* namespace mlib */
 
 
 #endif /* MATRIX_MATRIX_PRINT_HPP_ */

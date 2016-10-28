@@ -10,6 +10,10 @@
 
 #include "matrix_eye.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Check if the matrix A is identity
  *
@@ -42,6 +46,8 @@ bool compare(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B, T epsilon)
   return abs(A - B) < Err;
 }
 
+
+} /* namespace mlib */
 
 
 #endif /* MATRIX_MATRIX_UTILS_HPP_ */

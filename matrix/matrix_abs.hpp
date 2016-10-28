@@ -10,6 +10,9 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
 /**
  * @brief Absolut value of matrix
  *
@@ -31,6 +34,6 @@ Matrix<T, i, j> abs(const Matrix<T, i, j>& A)
   return absA;
 }
 
-
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_ABS_HPP_ */

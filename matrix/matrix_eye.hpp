@@ -10,6 +10,10 @@
 
 #include "matrix_fill.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Create a matrix with one number at the diagonal
  *
@@ -30,5 +34,6 @@ Matrix<T, n, n> eye(T data = 1)
   return eye;
 }
 
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_EYE_HPP_ */

@@ -8,6 +8,10 @@
 #ifndef MATRIX_MATRIX_FILL_HPP_
 #define MATRIX_MATRIX_FILL_HPP_
 
+namespace mlib
+{
+
+
 /**
  * @brief Create i,j matrix filling with some data
  *
@@ -28,6 +32,6 @@ Matrix<T, i, j> fill(T data)
   return A;
 }
 
-
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_FILL_HPP_ */

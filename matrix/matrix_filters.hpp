@@ -3,6 +3,10 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Mean
  *
@@ -98,5 +102,8 @@ T stddev(const Matrix<T, i, j>& A)
 {
   return sqrt(var(A));
 }
+
+
+} /* namespace mlib */
 
 #endif // MATRIX_FILTERS_HPP_

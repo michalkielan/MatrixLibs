@@ -10,6 +10,10 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Sum of two matrices
  *
@@ -102,5 +106,7 @@ Matrix<T, i, j> operator+(const T scalar, const Matrix<T, i, j>& A)
   return sum(A, scalar);
 }
 
+
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_SUM_HPP_ */

@@ -11,6 +11,8 @@
 
 #include "matrix.hpp"
 
+using namespace mlib;
+
 
 class MatrixTest : public ::testing::Test
 {

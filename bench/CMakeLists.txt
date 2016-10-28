@@ -1,13 +1,5 @@
-project(bench)
+include_directories(inc)
 
-file(GLOB src
-  "*.cpp"
-)
-
-add_executable(${PROJECT_NAME} ${src} )
-
-target_link_libraries(
-  ${PROJECT_NAME} 
-  benchmark
-  pthread
-)
+add_subdirectory(multiply)
+add_subdirectory(det)
+add_subdirectory(inv)

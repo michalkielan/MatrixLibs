@@ -3,6 +3,10 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Transpose of matrix nxm
  *
@@ -24,6 +28,9 @@ Matrix<T, m, n> trans(const Matrix<T, n, m>& A)
   }
   return transA;
 }
+
+
+} /* namespace mlib */
 
 
 #endif /* MATRIX_MATRIX_TRANS_HPP_ */

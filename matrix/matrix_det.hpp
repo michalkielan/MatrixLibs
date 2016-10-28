@@ -1,6 +1,13 @@
 #ifndef MATRIX_MATRIX_DET_HPP_
 #define MATRIX_MATRIX_DET_HPP_
 
+#include "matrix_type.hpp"
+
+
+namespace mlib
+{
+
+
 /**
  * @brief Determinant of matrix 1x1
  *
@@ -73,7 +80,7 @@ void swap_rows(Matrix<T, n, n>& data, size_t a, size_t b)
 template<typename T, std::size_t n>
 T det(Matrix<T, n, n> A)
 {
-  auto tmp{A};
+//  auto tmp{A};
 
   T factor{1};
   std::size_t pivot{0};
@@ -84,7 +91,7 @@ T det(Matrix<T, n, n> A)
 
     for (std::size_t i = 0; i < n; ++i)
     {
-      prod *= tmp[i][i];
+      prod *= A[i][i];
     }
     return prod / factor;
   };
@@ -98,7 +105,7 @@ T det(Matrix<T, n, n> A)
 
     std::size_t i = r;
 
-    while (tmp[i][pivot] == 0)
+    while (A[i][pivot] == 0)
     {
       ++i;
       if (n == i)
@@ -114,7 +121,7 @@ T det(Matrix<T, n, n> A)
 
     if (i != r)
     {
-      swap_rows(tmp, i, r);
+      swap_rows(A, i, r);
       factor *= -1;
     }
 
@@ -122,10 +129,10 @@ T det(Matrix<T, n, n> A)
     {
       if (i != r)
       {
-        T val = tmp[i][pivot];
+        T val = A[i][pivot];
         for (std::size_t j = pivot; j < n; ++j)
         {
-          tmp[i][j] -= val * tmp[r][j] / tmp[r][pivot];
+          A[i][j] -= val * A[r][j] / A[r][pivot];
         }
 
       }
@@ -134,5 +141,7 @@ T det(Matrix<T, n, n> A)
   }
   return prod();
 }
+
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_DET_HPP_ */

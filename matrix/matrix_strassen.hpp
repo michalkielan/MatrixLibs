@@ -10,6 +10,10 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
+
  /**
  * @brief Multiplication two matrixec using Strassen algorithm
  *
@@ -38,6 +42,10 @@ Matrix<T, 2, 2> strassen(const Matrix<T, 2, 2>& A, const Matrix<T, 2, 2>& B)
 
   return prod;
 }
+
+
+
+} /* namespace mlib */
 
 
 #endif /* MATRIX_MATRIX_STRASSEN_HPP_ */

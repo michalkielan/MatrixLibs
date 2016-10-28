@@ -10,6 +10,10 @@
 
 #include "matrix_type.hpp"
 
+namespace mlib
+{
+
+
 /**
  * @brief Substraction of two matrices
  *
@@ -87,5 +91,7 @@ Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const T scalar)
   return sub(A, scalar);
 }
 
+
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_SUB_HPP_ */

@@ -8,6 +8,9 @@
 #ifndef MATRIX_MATRIX_ZEROS_HPP_
 #define MATRIX_MATRIX_ZEROS_HPP_
 
+namespace mlib
+{
+
 
 /**
  * @brief Create i,j matrix filling with zeros
@@ -22,5 +25,7 @@ Matrix<T, i, j> zeros()
   return fill<T, i, j>(static_cast<T>(0));
 }
 
+
+} /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_ZEROS_HPP_ */

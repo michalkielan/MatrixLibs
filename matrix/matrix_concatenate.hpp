@@ -1,6 +1,11 @@
 #ifndef MATRIX_CONCATENATE_HPP_
 #define MATRIX_CONCATENATE_HPP_
 
+
+namespace mlib
+{
+
+
 template<typename T,  std::size_t n>
 Matrix<T, n,(n+n)> concatenateH(const Matrix<T, n, n>& A, const Matrix<T, n, n>& B);
 
@@ -161,5 +166,7 @@ Matrix<T, n,(n+n)> concatenateH(const Matrix<T, n, n>& A, const Matrix<T, n, n>&
   }
   return result;
 }
+
+} /* namespace mlib */
 
 #endif // MATRIX_CONCATENATE_HPP_

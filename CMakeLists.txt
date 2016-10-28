@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 
-set(COMPILE_FLAGS "-std=c++14 -std=gnu++14 -Wall -flto")
+set(COMPILE_FLAGS "-std=c++14 -std=gnu++14 -ffast-math -Wall -flto")
 
 option(SANITIZER "Address Sanitizer" OFF)
 

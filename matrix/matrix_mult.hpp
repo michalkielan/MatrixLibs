@@ -8,6 +8,9 @@
 #ifndef MATRIX_MATRIX_MULT_HPP_
 #define MATRIX_MATRIX_MULT_HPP_
 
+namespace mlib
+{
+
 
 /**
  * @brief  Multiplication of two matrices
@@ -105,6 +108,9 @@ Matrix<T, i, j> operator*(const T scalar, const Matrix<T, i, j>& A)
 {
   return mult(A, scalar);
 }
+
+
+} /* namespace mlib */
 
 
 #endif /* MATRIX_MATRIX_MULT_HPP_ */
