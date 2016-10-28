@@ -559,9 +559,9 @@ TEST_F(MatrixTest, convolution)
     9,  9,  9,  9,  9};
 
   Matrix<float, 3, 3> kernel =
-  {1/9, 1/9, 1/9,
-   1/9, 1/9, 1/9,
-   1/9, 1/9, 1/9 };
+  {0.1111, 0.1111, 0.1111,
+   0.1111, 0.1111, 0.1111,
+   0.1111, 0.1111, 0.1111 };
 
   const Matrix<float, 7, 7> conv_full =
  { 1, 2,  3,  3,  3,  2, 1,
@@ -584,7 +584,7 @@ TEST_F(MatrixTest, convolution)
    12, 13, 14,
     9,  9,  9, }; 
   //print(conv2(A,kernel));
-  ASSERT_TRUE(compare(conv_same, conv2(A,kernel), 0.0001f));
+  ASSERT_TRUE(compare(conv_same, conv2(A,kernel), 0.1f));
   // The following two lines are not implemented
   // ASSERT_TRUE(compare(conv_full, conv2_full(A,kernel), 0.0001f));
   // ASSERT_TRUE(compare(conv_valid, conv2_valid(A,kernel), 0.0001f));
