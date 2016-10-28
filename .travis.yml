@@ -24,6 +24,13 @@ addons:
 
 
 before_script:
+    - git clone https://github.com/google/benchmark
+    - cd benchmark
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
+    - sudo make install
     - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 
 script: 
