@@ -2,6 +2,11 @@ cmake_minimum_required (VERSION 2.6)
 
 set(COMPILE_FLAGS "-std=c++14 -std=gnu++14 -Wall -flto")
 
+option(SANITIZER "Address Sanitizer" OFF)
+
+if(SANITIZER)
+  set(COMPILE_FLAGS "${COMPILE_FLAGS} -fsanitize=address")
+endif()
 
 set(GTEST_FLAGS "-lgtest -lpthread")
 set(LINK_FLAGS "${GTEST_FLAGS} -flto")
