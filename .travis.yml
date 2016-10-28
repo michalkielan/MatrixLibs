@@ -15,6 +15,7 @@ addons:
             - gcc-5
             - g++-5
             - libgtest-dev
+            - cmake
 
         coverity_scan:
             name: MatrixLibs
@@ -31,6 +32,7 @@ before_script:
     - cmake ..
     - make
     - sudo make install
+    - cd ../..
     - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 
 script: 
