@@ -11,7 +11,7 @@ addons:
     apt:
         sources:
             - ubuntu-toolchain-r-test
-            i smspillaz/cmake-2.8.12
+            - smspillaz/cmake-2.8.12
         packages:
             - gcc-5
             - g++-5
