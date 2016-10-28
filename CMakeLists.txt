@@ -21,4 +21,5 @@ enable_testing()
 find_package(Gtest)
 
 add_subdirectory(tst)
+add_subdirectory(bench)
 
