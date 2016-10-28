@@ -53,18 +53,18 @@ Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
   {
     for(std::size_t jt = 0; jt < j; jt++)
     {
-      result[it][jt] = kernel[0][0] * ((isOutOfRange(it-1,jt-1)) ? 0 : A[it-1][jt-1]);   
-      result[it][jt] += kernel[0][1] * ((isOutOfRange(it-1,jt))   ? 0 : A[it-1][jt]);
-      result[it][jt] += kernel[0][2] * ((isOutOfRange(it-1,jt+1)) ? 0 : A[it-1][jt+1]);
-      result[it][jt] += kernel[1][0] * ((isOutOfRange(it,jt-1))   ? 0 : A[it][jt-1]);   
-      result[it][jt] += kernel[1][1] * ((isOutOfRange(it,jt))     ? 0 : A[it][jt]);   
-      result[it][jt] += kernel[1][2] * ((isOutOfRange(it,jt+1))   ? 0 : A[it][jt+1]);   
-      result[it][jt] += kernel[2][0] * ((isOutOfRange(it+1,jt-1)) ? 0 : A[it+1][jt-1]);  
-      result[it][jt] += kernel[2][1] * ((isOutOfRange(it+1,jt))   ? 0 : A[it+1][jt]);
-      result[it][jt] += kernel[2][2] * ((isOutOfRange(it+1,jt+1)) ? 0 : A[it+1][jt+1]); 
+      result[it][jt] = 0;
+      result[it][jt] += ((isOutOfRange(it-1,jt-1)) ? 0 : kernel[0][0] * A[it-1][jt-1]);   
+      result[it][jt] += ((isOutOfRange(it-1,jt))   ? 0 : kernel[0][1] * A[it-1][jt]);
+      result[it][jt] += ((isOutOfRange(it-1,jt+1)) ? 0 : kernel[0][2] * A[it-1][jt+1]);
+      result[it][jt] += ((isOutOfRange(it,jt-1))   ? 0 : kernel[1][0] * A[it][jt-1]);   
+      result[it][jt] += ((isOutOfRange(it,jt))     ? 0 : kernel[1][1] * A[it][jt]);   
+      result[it][jt] += ((isOutOfRange(it,jt+1))   ? 0 : kernel[1][2] * A[it][jt+1]);   
+      result[it][jt] += ((isOutOfRange(it+1,jt-1)) ? 0 : kernel[2][0] * A[it+1][jt-1]);  
+      result[it][jt] += ((isOutOfRange(it+1,jt))   ? 0 : kernel[2][1] * A[it+1][jt]);
+      result[it][jt] += ((isOutOfRange(it+1,jt+1)) ? 0 : kernel[2][2] * A[it+1][jt+1]); 
     }
   }
-
   return result;
 }
 
