@@ -27,7 +27,7 @@ static void Multiply_500_500(benchmark::State& state)
 
   while (state.KeepRunning())
   {
-    auto C = A * B;
+    mult(A, B);
   }
 }
 
@@ -41,7 +41,7 @@ static void Multiply_400_400(benchmark::State& state)
 
   while (state.KeepRunning())
   {
-    auto C = A * B;
+    mult(A, B);
   }
 }
 
