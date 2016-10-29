@@ -563,15 +563,14 @@ TEST_F(MatrixTest, convolution)
    0.11111111, 0.11111111, 0.11111111,
    0.11111111, 0.11111111, 0.11111111 };
 
-  //conv_full and conv_valid are matrices for conv, which are not implemented
-/*  const Matrix<float, 7, 7> conv_full =
+  const Matrix<float, 7, 7> conv_full =
  { 1, 2,  3,  3,  3,  2, 1,
    3, 6,  9, 10, 11,  8, 4,
    4, 8, 12, 13, 14, 10, 5,
    4, 8, 12, 13, 14, 10, 5,
    3, 6,  9,  9,  9,  6, 3,
    2, 4,  6,  6,  6,  4, 2, 
-   1, 2,  3,  3,  3,  2, 1 };*/
+   1, 2,  3,  3,  3,  2, 1 };
 
   const Matrix<float, 5, 5> conv_same =
  { 6,  9, 10, 11,  8,
@@ -580,16 +579,14 @@ TEST_F(MatrixTest, convolution)
    6,  9,  9,  9,  6,
    4,  6,  6,  6,  4 };
 
-  //conv_full and conv_valid are matrices for conv, which are not implemented
-/*  const Matrix<float, 3, 3> conv_valid =
+  const Matrix<float, 3, 3> conv_valid =
  { 12, 13, 14,
    12, 13, 14,
-    9,  9,  9, }; */
+    9,  9,  9, }; 
 
   ASSERT_TRUE(compare(conv_same, conv2(A,kernel), 0.1f));
-  // The following two lines are not implemented
-  // ASSERT_TRUE(compare(conv_full, conv2_full(A,kernel), 0.0001f));
-  // ASSERT_TRUE(compare(conv_valid, conv2_valid(A,kernel), 0.0001f));
+  ASSERT_TRUE(compare(conv_full, conv2_full(A,kernel), 0.0001f));
+  ASSERT_TRUE(compare(conv_valid, conv2_valid(A,kernel), 0.0001f));
 
   const Matrix<float, 5, 5> B =
  { 5, 5, 5, 5, 5,
