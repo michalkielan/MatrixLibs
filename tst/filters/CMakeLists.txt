@@ -1,4 +1,4 @@
-project(test_all)
+project(test-filters)
 
 file(GLOB src
   "*.cpp"

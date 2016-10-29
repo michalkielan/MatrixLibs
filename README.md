@@ -16,6 +16,7 @@ MatrixLibs is C++11 meta-programming, header-only, no-dynamic memory allocations
 * LU
 * Concatenate
 * Histogram
+* Filters: mean, meadina, variance, standard deviation
 
 
 ## Usage
