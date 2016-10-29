@@ -3,6 +3,7 @@
 .settings/
 performance
 correctness
+build
 
 # Makefile
 Makefile
