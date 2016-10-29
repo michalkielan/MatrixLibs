@@ -11,10 +11,13 @@ addons:
     apt:
         sources:
             - ubuntu-toolchain-r-test
+            - george-edison55-precise-backports
         packages:
             - gcc-5
             - g++-5
             - libgtest-dev
+            - cmake
+            - cmake-data
 
         coverity_scan:
             name: MatrixLibs
@@ -31,6 +34,7 @@ before_script:
     - cmake ..
     - make
     - sudo make install
+    - cd ../..
     - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 
 script: 
