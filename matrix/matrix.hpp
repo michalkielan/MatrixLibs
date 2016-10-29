@@ -11,6 +11,7 @@
 
 #define PRINT_IOSTREAM_ENABLE 1
 
+#include "matrix_type.hpp"
 #include "matrix_abs.hpp"
 #include "matrix_concatenate.hpp"
 #include "matrix_conv2.hpp"
@@ -33,7 +34,6 @@
 #include "matrix_sum.hpp"
 #include "matrix_swap.hpp"
 #include "matrix_trans.hpp"
-#include "matrix_type.hpp"
 #include "matrix_utils.hpp"
 #include "matrix_var.hpp"
 #include "matrix_zeros.hpp"

@@ -6,6 +6,7 @@
 #include <cmath>
 #include <algorithm>
 #include <map>
+#include <complex>
 
 namespace mlib
 {
@@ -16,9 +17,10 @@ namespace mlib
  *
  * @Usage: Matrix<type, row, col>
  */
-template <typename T, std::size_t i, std::size_t j> //,
-//typename Arithmetic = std::enable_if<std::is_arithmetic<T>::value>>
+template <typename T, std::size_t i, std::size_t j>
 using Matrix = std::array<std::array<T, j>, i>;
+
+
 
 } /* namespace mlib */
 
