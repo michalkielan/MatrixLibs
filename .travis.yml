@@ -27,20 +27,20 @@ addons:
 
 
 before_script:
-    - git clone https://github.com/google/benchmark
-    - cd benchmark
-    - mkdir build
-    - cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release -DBENCHMARK_ENABLE_LTO=true ..
-    - make
-    - sudo make install
-    - cd ../..
+#    - git clone https://github.com/google/benchmark
+#    - cd benchmark
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_BUILD_TYPE=Release -DBENCHMARK_ENABLE_LTO=true ..
+#   - make
+#    - sudo make install
+#    - cd ../..
     - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
 
 script: 
     - mkdir build
     - cd build
-    - cmake .. 
+    - cmake DBUILD_BENCH=OFF .. 
     - make 
     - make test
 

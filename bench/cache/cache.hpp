@@ -8,7 +8,6 @@
 #ifndef BENCH_CACHE_CACHE_HPP_
 #define BENCH_CACHE_CACHE_HPP_
 
-
 #include <benchmark/benchmark.h>
 #include "setRand.hpp"
 
