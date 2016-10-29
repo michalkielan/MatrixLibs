@@ -31,7 +31,7 @@ before_script:
     - cd benchmark
     - mkdir build
     - cd build
-    - cmake ..
+    - cmake -DCMAKE_BUILD_TYPE=Release -DBENCHMARK_ENABLE_LTO=true ..
     - make
     - sudo make install
     - cd ../..

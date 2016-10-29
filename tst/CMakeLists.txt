@@ -1,22 +1,3 @@
-#foreach(subdir ${SUBDIRS})
-#  add_subdirectory(${subdir})
-#endforeach()
-#TODO: add all folders automatically
-
-#add_subdirectory( det )  
-#add_subdirectory( zeros )
-#add_subdirectory( getminor )  
-#add_subdirectory( inv )
-#add_subdirectory( mult )
-#add_subdirectory( sum)
-#add_subdirectory( correct_test ) 
-#add_subdirectory( equal )
-#add_subdirectory( filters )
-#add_subdirectory( histogram )
-#add_subdirectory( lu )
-#add_subdirectory( sub )
-#add_subdirectory( trans )
-
 add_subdirectory( compare )
 add_subdirectory( concatenate )
 add_subdirectory( conv )
