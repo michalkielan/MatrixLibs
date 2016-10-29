@@ -36,10 +36,9 @@ TEST(MatrixTest, inv_3_3)
   const Matrix<float, 3, 3> invA =
   {  0.05,  0.45, -0.25,
      0.25,  0.25, -0.25,
-    -0.15, -0.35,  0.55 };
+    -0.15, -0.35,  0.75 };
 
   ASSERT_TRUE(compare(inv(A), invA, 0.01f));
-
 }
 
 TEST(MatrixTest, inv_4_4)

@@ -11,7 +11,6 @@
 using namespace mlib;
 
 
-
 TEST(MatrixTest, LU_3x3)
 {
   const Matrix<float, 3, 3> A =
@@ -52,13 +51,14 @@ TEST(MatrixTest, LU_2x2)
   { 4, 3,
     6, 3};
 
-    auto LU = lu(A);
-    auto&& L = LU.first;
-    auto&& U = LU.second;
+  auto LU = lu(A);
+  auto L = LU.first;
+  auto U = LU.second;
 
   const Matrix<float, 2, 2> expected_L =
   { 1, 0,
   1.5, 1};
+
   ASSERT_TRUE(compare(expected_L, L, 0.0001f));
 
   const Matrix<float, 2, 2> expected_U =
@@ -67,13 +67,11 @@ TEST(MatrixTest, LU_2x2)
 
   ASSERT_TRUE(compare(expected_U, U, 0.0001f));
 
-  // const Matrix<float, 2, 2> random =
-  // { 4.0f, 12.0f,
-  //   9.0f, 12.0f};
+  const Matrix<float, 2, 2> random =
+   { 4.0f, 12.0f,
+     9.0f, 12.0f};
 
-//TODO fix compare bug
- // auto areNotEqualsU = compare(random, U, 0.0001f);
- // ASSERT_FALSE(areNotEqualsU);
+  ASSERT_FALSE(compare(random, U, 0.0001f));
 }
 
 

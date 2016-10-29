@@ -26,7 +26,6 @@ TEST(MatrixTest, compare_failed)
 
 TEST(MatrixTest, compare_failed_float)
 {
-
   const Matrix<float, 2, 2> C =
   { 1.0,    2.000005,
     1.0001, 1.01 };
@@ -36,7 +35,6 @@ TEST(MatrixTest, compare_failed_float)
     1.0005, 1.05 };
 
   ASSERT_FALSE(compare(C, D, 0.00001f));
-
 }
 
 TEST(MatrixTest, compare_2_2)
@@ -51,7 +49,6 @@ TEST(MatrixTest, compare_2_2)
     -1.0001, -1.01 };
 
   ASSERT_TRUE(compare(E, F, 0.01f));
-
 }
 
 TEST(MatrixTest, compare_failed_epsilon)

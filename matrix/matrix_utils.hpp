@@ -39,11 +39,20 @@ bool isIdentity(const Matrix<T, n, n>& A)
  *
  * return true if compare, otherwise false
  */
-template<typename T, std::size_t i, std::size_t j>
-bool compare(const Matrix<T, i, j>& A, const Matrix<T, i, j>& B, T epsilon)
+template<typename T, std::size_t row, std::size_t col>
+bool compare(const Matrix<T, row, col>& A, const Matrix<T, row, col>& B, const float epsilon)
 {
-  auto Err = fill<T, i, j>(epsilon);
-  return abs(A - B) < Err;
+  for(std::size_t i = 0; i < row; i++)
+  {
+    for(std::size_t j = 0; j < col; j++)
+    {
+      if(std::abs(A[i][j] - B[i][j]) > epsilon)
+      {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 
