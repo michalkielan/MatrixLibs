@@ -30,19 +30,19 @@ Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
   auto isOutOfRange = [](int a, int b)
   {
     std::size_t result = 0;
-    if (a-1 < 0)
+    if (a < 0)
     {
       result++;
     }
-    if (b-1 < 0)
+    if (b < 0)
     {
       result++;
     }
-    if (static_cast<unsigned int>(a+1) >= i)
+    if (static_cast<unsigned int>(a) >= i)
     {
       result++;
     }
-    if (static_cast<unsigned int>(b+1) >= j)
+    if (static_cast<unsigned int>(b) >= j)
     {
       result++;
     }
