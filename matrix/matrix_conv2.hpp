@@ -31,27 +31,71 @@ template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> conv2(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
 {
   Matrix<T, i, j> result{};
-
-  for(std::size_t it = 1; it < i-1; it++)
+  auto isOutOfRange = [](int a, int b)
   {
-    for(std::size_t jt = 1; jt < j-1; jt++)
+    std::size_t result = 0;
+    if (a-1 < 0)
     {
-      result[it][jt] = kernel[0][0] * A[it-1][jt-1] +
-      kernel[0][1] * A[it-1][jt] +
-      kernel[0][2] * A[it-1][jt+1] +
-      kernel[1][0] * A[it][jt-1] +
-      kernel[1][1] * A[it][jt] +
-      kernel[1][2] * A[it][jt+1] +
-      kernel[2][0] * A[it+1][jt-1] +
-      kernel[2][1] * A[it+1][jt] +
-      kernel[2][2] * A[it+1][jt+1];
+      result++;
+    }
+    if (b-1 < 0)
+    {
+      result++;
+    }
+    if (static_cast<unsigned int>(a+1) >= i)
+    {
+      result++;
+    }
+    if (static_cast<unsigned int>(b+1) >= j)
+    {
+      result++;
+    }
+    return result;
+  };
+
+  for(std::size_t it = 0; it < i; it++)
+  {
+    for(std::size_t jt = 0; jt < j; jt++)
+    {
+      result[it][jt] = 0;
+      result[it][jt] += ((isOutOfRange(it-1,jt-1)) ? 0 : kernel[0][0] * A[it-1][jt-1]);   
+      result[it][jt] += ((isOutOfRange(it-1,jt))   ? 0 : kernel[0][1] * A[it-1][jt]);
+      result[it][jt] += ((isOutOfRange(it-1,jt+1)) ? 0 : kernel[0][2] * A[it-1][jt+1]);
+      result[it][jt] += ((isOutOfRange(it,jt-1))   ? 0 : kernel[1][0] * A[it][jt-1]);   
+      result[it][jt] += ((isOutOfRange(it,jt))     ? 0 : kernel[1][1] * A[it][jt]);   
+      result[it][jt] += ((isOutOfRange(it,jt+1))   ? 0 : kernel[1][2] * A[it][jt+1]);   
+      result[it][jt] += ((isOutOfRange(it+1,jt-1)) ? 0 : kernel[2][0] * A[it+1][jt-1]);  
+      result[it][jt] += ((isOutOfRange(it+1,jt))   ? 0 : kernel[2][1] * A[it+1][jt]);
+      result[it][jt] += ((isOutOfRange(it+1,jt+1)) ? 0 : kernel[2][2] * A[it+1][jt+1]); 
     }
   }
+  return result;
+}
+
+//experimental conv2 with 'full' option
+//returns i+1 x j+1 because kernel is 3x3
+//basic rule is i+(n-1)/2 x j+(n-1)/2
+template<typename T, std::size_t i, std::size_t j>
+Matrix<T, i+1, j+1> conv2_full(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
+{
+  Matrix<T, i+1, j+1> result{};
+
+  return result;
+}
+
+//experimental conv2 with 'valid' option
+//returns i-1 x j-1 because kernel is 3x3
+//basic rule is i-(n-1)/2 x j-(n-1)/2
+template<typename T, std::size_t i, std::size_t j>
+Matrix<T, i-1, j-1> conv2_valid(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
+{
+  Matrix<T, i-1, j-1> result{};
 
   return result;
 }
 
 } /* namespace mlib */
+
 
 
 #endif /* MATRIX_MATRIX_CONV2_HPP_ */
