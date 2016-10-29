@@ -11,12 +11,13 @@ addons:
     apt:
         sources:
             - ubuntu-toolchain-r-test
-            - smspillaz
+            - george-edison55-precise-backports
         packages:
             - gcc-5
             - g++-5
             - libgtest-dev
             - cmake
+            - cmake-data
 
         coverity_scan:
             name: MatrixLibs
