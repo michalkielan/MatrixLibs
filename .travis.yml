@@ -5,7 +5,7 @@ compiler:
     - gcc
 
 install:
-    - if [ "$CXX" = "g++" ]; then export CXX="g++-5"; fi
+    - if [ "$CXX" = "g++" ]; then export CXX="g++-6"; fi
 
 addons:
     apt:
@@ -13,8 +13,8 @@ addons:
             - ubuntu-toolchain-r-test
             - george-edison55-precise-backports
         packages:
-            - gcc-5
-            - g++-5
+            - g++-6
+            - lcov
             - libgtest-dev
             - cmake
             - cmake-data
