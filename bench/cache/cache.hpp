@@ -52,6 +52,7 @@ template<typename T, std::size_t row, std::size_t col>
 static void rand_major(benchmark::State& state)
 {
   mlib::Matrix<T, row, col> A;
+  std::array<T, col> rand;
   T sum = 0;
 
   const std::size_t min = 0;
@@ -60,13 +61,18 @@ static void rand_major(benchmark::State& state)
   std::default_random_engine dre {std::random_device{}()};
   std::uniform_int_distribution<std::size_t> ud {min, max};
 
+  for(auto& r : rand)
+  {
+    r = ud(dre);
+  }
+
   while (state.KeepRunning())
   {
-    for(std::size_t i = 0; i < col; i++)
+    for(std::size_t i = 0; i < row; i++)
     {
-      for(std::size_t j = 0; j < row; j++)
+      for(std::size_t j = 0; j < col; j++)
       {
-        sum += A[i][ud(dre)];
+        sum += A[i][rand[j]];
       }
     }
   }

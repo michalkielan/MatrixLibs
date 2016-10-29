@@ -35,6 +35,7 @@ std::pair<Matrix<T,n,n>, Matrix<T,n,n>>lu(const Matrix<T,n,n>& A)
       }
       U[i][j] = A[i][j] - sum;
     }
+
     for(std::size_t i = j; i < n; i++)
     {
       sum = 0.0;
@@ -49,7 +50,7 @@ std::pair<Matrix<T,n,n>, Matrix<T,n,n>>lu(const Matrix<T,n,n>& A)
         L[i][j] = (A[i][j] - sum) / U[j][j];
     }
   }
-  return std::pair<Matrix<T,n,n>, Matrix<T,n,n>>{L, U};
+  return std::make_pair(L, U);
 }
 
 } /* namespace mlib */

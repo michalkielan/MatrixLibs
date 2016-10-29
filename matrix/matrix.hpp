@@ -31,6 +31,7 @@
 #include "matrix_strassen.hpp"
 #include "matrix_sub.hpp"
 #include "matrix_sum.hpp"
+#include "matrix_swap.hpp"
 #include "matrix_trans.hpp"
 #include "matrix_type.hpp"
 #include "matrix_utils.hpp"

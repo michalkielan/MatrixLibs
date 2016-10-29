@@ -1,7 +1,7 @@
 #ifndef MATRIX_MATRIX_DET_HPP_
 #define MATRIX_MATRIX_DET_HPP_
 
-#include "matrix_type.hpp"
+#include "matrix_swap.hpp"
 
 
 namespace mlib
@@ -57,19 +57,6 @@ T det(const Matrix<T, 3, 3>& A)
 }
 
 
-template<typename T, std::size_t n>
-void swap_rows(Matrix<T, n, n>& data, size_t a, size_t b)
-{
-  if (a != b)
-  {
-    for (size_t k = 0; k < n; ++k)
-    {
-      std::swap(data[a], data[b]);
-    }
-  }
-}
-
-
 /**
  * @brief Determinant of matrix nxn
  *
@@ -80,14 +67,12 @@ void swap_rows(Matrix<T, n, n>& data, size_t a, size_t b)
 template<typename T, std::size_t n>
 T det(Matrix<T, n, n> A)
 {
-//  auto tmp{A};
-
   T factor{1};
   std::size_t pivot{0};
 
   auto prod = [&]()
   {
-    T prod{1};
+    float prod{1};
 
     for (std::size_t i = 0; i < n; ++i)
     {
