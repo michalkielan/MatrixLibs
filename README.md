@@ -1,8 +1,8 @@
 ## Overwiew
-MatrixLibs is C++11 meta-programming, header-only, no-dynamic memory allocations library for matrix computation, similar to matlab, microcontroller friendly if you use C++ on embedded platform without using exceptions
+MatrixLibs is C++11 meta-programming, header-only, no-dynamic memory allocations library for matrix computation, similar to matlab.
 
 
-## Algorithm already implemented:
+## Algorithms already implemented:
 * Sum
 * Substraction
 * Multiply
@@ -15,6 +15,7 @@ MatrixLibs is C++11 meta-programming, header-only, no-dynamic memory allocations
 * Determinant
 * LU
 * Concatenate
+* Convolution
 * Histogram
 * Filters: mean, meadina, variance, standard deviation
 
