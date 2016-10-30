@@ -1,5 +1,5 @@
 /*
-/ * sum.cpp
+/ * sub.cpp
  *
  *  Created on: Oct 29, 2016
  *      Author: michal
@@ -29,6 +29,13 @@ TEST(MatrixTest, sub_scalar)
     -2, -1 };
 
   ASSERT_EQ(sub, res);
+
+  auto sub2 = A--;
+
+  constexpr Matrix<float, 2, 2> expected2 =
+  {  5,  0,
+    -2, -1 };
+  ASSERT_TRUE(compare(sub2,expected2,0.0001f));
 }
 
 

@@ -92,6 +92,16 @@ Matrix<T, i, j> operator-(const Matrix<T, i, j>& A, const T scalar)
 }
 
 
+/* EXPERIMENTAL
+ * TODO Doxygen comments
+ */
+template<typename T, std::size_t i, std::size_t j>
+Matrix<T, i, j> operator--(const Matrix<T, i, j>& A, int)
+{
+  return (A - static_cast<T>(1));
+}
+
+
 } /* namespace mlib */
 
 #endif /* MATRIX_MATRIX_SUB_HPP_ */
