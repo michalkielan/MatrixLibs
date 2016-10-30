@@ -5,8 +5,8 @@
  *      Author: michal
  */
 
-#ifndef MATRIX_MATRIX_UTILS_HPP_
-#define MATRIX_MATRIX_UTILS_HPP_
+#ifndef MATRIX_UTILS_HPP_
+#define MATRIX_UTILS_HPP_
 
 #include "matrix_eye.hpp"
 
@@ -25,8 +25,8 @@ namespace mlib
 template<typename T, std::size_t n>
 bool isIdentity(const Matrix<T, n, n>& A)
 {
-  const auto identity{ eye<unsigned int, n>() };
-  const auto uiA { static_cast<Matrix<unsigned int, n, n>>(A) };
+  const auto identity {eye<unsigned int, n>()};
+  const auto uiA {static_cast<Matrix<unsigned int, n, n>>(A)};
   return (uiA == identity);
 }
 
@@ -59,4 +59,4 @@ bool compare(const Matrix<T, row, col>& A, const Matrix<T, row, col>& B, const f
 } /* namespace mlib */
 
 
-#endif /* MATRIX_MATRIX_UTILS_HPP_ */
+#endif /* MATRIX_UTILS_HPP_ */

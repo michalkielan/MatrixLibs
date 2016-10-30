@@ -72,7 +72,7 @@ T det(Matrix<T, n, n> A)
 
   auto prod = [&]()
   {
-    float prod{1};
+    T prod{1};
 
     for (std::size_t i = 0; i < n; ++i)
     {

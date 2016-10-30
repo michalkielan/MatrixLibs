@@ -15,7 +15,9 @@ namespace mlib
 
 
  /**
- * @brief Multiplication two matrixec using Strassen algorithm
+ * @brief Multiplication two matrixec using Strassen algorithm,
+ * faster for matrix 2x2, but full recursivery algorithm for
+ * every matrix is much slower, TODO: do something with it
  *
  * @param [in] Matrix A 2x2
  * @param [in] Matrix B 2x2

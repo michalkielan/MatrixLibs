@@ -26,8 +26,39 @@ static void multiply(benchmark::State& state)
   }
 }
 
+
+static void multiply_2_2_strassen(benchmark::State& state)
+{
+  mlib::Matrix<int, 2, 2> A, B;
+
+  setRand(A);
+  setRand(B);
+
+  while (state.KeepRunning())
+  {
+    mlib::strassen(A,B);
+  }
+}
+
+
+static void multiply_2_2(benchmark::State& state)
+{
+  mlib::Matrix<int, 2, 2> A, B;
+
+  setRand(A);
+  setRand(B);
+
+  while (state.KeepRunning())
+  {
+    mlib::mult(A,B);
+  }
+}
+
+
 static const auto format = benchmark::kMillisecond;
 
+BENCHMARK(multiply_2_2);
+BENCHMARK(multiply_2_2_strassen);
 
 BENCHMARK_TEMPLATE(multiply, int, 1*100, 1*100)->Unit(format);
 BENCHMARK_TEMPLATE(multiply, int, 2*100, 2*100)->Unit(format);
