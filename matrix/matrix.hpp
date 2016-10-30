@@ -6,7 +6,7 @@
  * Description: Simple matrix library
  */
 
-#ifndef MATRIX_MATRIX_HPP_
+#ifndef MATRIX_HPP_
 #define MATRIX_HPP_
 
 #define PRINT_IOSTREAM_ENABLE 1
@@ -39,4 +39,4 @@
 #include "matrix_zeros.hpp"
 
 
-#endif /* MATRIX_MATRIX_HPP_ */
+#endif /* MATRIX_HPP_ */
