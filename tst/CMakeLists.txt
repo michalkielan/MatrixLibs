@@ -1,3 +1,4 @@
+add_subdirectory( cholesky )
 add_subdirectory( compare )
 add_subdirectory( concatenate )
 add_subdirectory( conv )
