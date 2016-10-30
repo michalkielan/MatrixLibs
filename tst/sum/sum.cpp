@@ -28,6 +28,12 @@ TEST(MatrixTest, sum)
 
   ASSERT_EQ(sum, res);
 
+  auto sum2 = A++;
+  
+  constexpr Matrix<float, 2, 2> expected2 =
+  { 2, 3,
+    1, 2 };
+  ASSERT_TRUE(compare(sum2,expected2,0.0001f));
 }
 
 TEST(MatrixTest, sum_scalar)
