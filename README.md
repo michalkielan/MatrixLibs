@@ -13,7 +13,8 @@ MatrixLibs is C++11 meta-programming, header-only, no-dynamic memory allocations
 * Inverse
 * Strassen
 * Determinant
-* LU
+* LU decomposition
+* Cholesky decomposition
 * Concatenate
 * Convolution
 * Histogram

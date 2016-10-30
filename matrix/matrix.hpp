@@ -13,6 +13,7 @@
 
 #include "matrix_type.hpp"
 #include "matrix_abs.hpp"
+#include "matrix_cholesky.hpp"
 #include "matrix_concatenate.hpp"
 #include "matrix_conv2.hpp"
 #include "matrix_det.hpp"
