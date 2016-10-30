@@ -107,8 +107,13 @@ Matrix<T, i, j> operator+(const T scalar, const Matrix<T, i, j>& A)
 }
 
 
-/* EXPERIMENTAL
- * TODO Doxygen comments
+/* 
+ * @brief Overloaded '++' operator for add 
+ * matrix and scalar value of '1'
+ *
+ * @param [in] Matrix A ixj
+ *
+ * @return Result of sum matrix A and scalar of value 1
  */
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i, j> operator++(const Matrix<T, i, j>& A, int)
