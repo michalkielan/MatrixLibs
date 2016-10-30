@@ -73,7 +73,7 @@ Matrix<T, (i1+i2), j> concatenate(const Matrix<T, i1, j>& A, const Matrix<T, i2,
       result[it][jt] = A[it][jt];
     }
   }
-  for (std::size_t it = i1; it < i2; it++)
+  for (std::size_t it = i1; it < (i1+i2); it++)
   {
     for (std::size_t jt = 0; jt < j; jt++)
     {
@@ -102,9 +102,9 @@ Matrix<T, i, (j1+j2)> concatenate(const Matrix<T, i, j1>& A, const Matrix<T, i, 
     {
       result[it][jt] = A[it][jt];
     }
-    for (std::size_t jt = j1; jt < j2; jt++)
+    for (std::size_t jt = j1; jt < (j1+j2); jt++)
     {
-      result[it][jt] = A[it][jt-j2];
+      result[it][jt] = B[it][jt-j1];
     }
   }
   return result;
@@ -161,7 +161,7 @@ Matrix<T, n,(n+n)> concatenateH(const Matrix<T, n, n>& A, const Matrix<T, n, n>&
     }
     for (std::size_t j = n; j < n+n; j++)
     {
-      result[i][j] = A[i][j-n];
+      result[i][j] = B[i][j-n];
     }
   }
   return result;
