@@ -95,11 +95,11 @@ Matrix<T, i+2, j+2> conv2_full(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& 
     {
       result++;
     }
-    if (static_cast<unsigned int>(a) >= i+2)
+    if (static_cast<unsigned int>(a) >= i)
     {
       result++;
     }
-    if (static_cast<unsigned int>(b) >= j+2)
+    if (static_cast<unsigned int>(b) >= j)
     {
       result++;
     }

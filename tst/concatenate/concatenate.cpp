@@ -41,7 +41,6 @@ TEST(MatrixTest, concatenate)
     6, 3, 1, 15, 13};
 
   auto CD = concatenate(C,D);
-
   ASSERT_TRUE(compare(expected_CD, CD, 0.0001f));
 
   const Matrix<float, 2, 2> E =
