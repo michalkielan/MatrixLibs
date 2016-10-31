@@ -72,7 +72,11 @@ TEST(MatrixTest, LU_4_4_bad_matrix)
      5,     6,     7,     8,
      10,    11,    12,    13,
      14,    15,    16,    17 };
-
+  auto LU = lu(A);
+  auto L = LU.first;
+  auto U = LU.second;
+  ASSERT_TRUE(compare(A, L*U, 0.0001f));
+/*
   try
   {
     auto LU = lu(A);
@@ -83,7 +87,7 @@ TEST(MatrixTest, LU_4_4_bad_matrix)
     std::cerr << "Error: " << e.what() << std::endl;
     ASSERT_TRUE(true);
   }
-
+*/
 }
 
 
