@@ -24,6 +24,7 @@ std::pair<Matrix<T,n,n>, Matrix<T,n,n>>lu(const Matrix<T,n,n>& data)
   auto A{data};
   auto L { eye<T, n>() };
   auto U { zeros<T, n, n>() };
+  bool inputMatrixSwapped = false;
   T sum {};
   std::size_t nr1{1}, nr2{1};
 begin:
@@ -61,6 +62,10 @@ begin:
       }
     }
   }
+  if (inputMatrixSwapped)
+  {
+    swap_rows(L,1,2);
+  }
   return std::make_pair(L, U);
 
 // The following lines are changing rows procedure. 
@@ -79,6 +84,7 @@ try_swap:
   }    
   A = data;
   swap_rows(A, nr1, nr2);
+  inputMatrixSwapped = true;
   goto begin;
 // END of changing rows procedure
 
