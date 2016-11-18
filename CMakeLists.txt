@@ -35,11 +35,22 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}" )
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINK_EXECUTABLE} ${LINK_FLAGS}" )
 
 include_directories(matrix)
-
 include_directories(${GTEST_INCLUDE_DIRS})
 
 enable_testing()
 find_package(Gtest)
+
+include(ExternalProject)
+ExternalProject_Add(rapidcheck
+    GIT_REPOSITORY https://github.com/emil-e/rapidcheck
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/rapidcheck
+#    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/rapidcheck
+)
+
+ExternalProject_Get_Property(rapidcheck install_dir)
+include_directories(${install_dir}/src/rapidcheck/include)
+
+#add_dependencies(${PROJECT_NAME} rapidcheck)
 
 if(BUILD_TESTS)
   add_subdirectory(tst)
@@ -48,3 +59,6 @@ endif()
 if(BUILD_BENCH)
   add_subdirectory(bench)
 endif()
+
+
+

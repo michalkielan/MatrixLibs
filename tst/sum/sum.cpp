@@ -6,6 +6,7 @@
  */
 
 #include <gtest/gtest.h>
+#include <rapidcheck.h>
 #include "matrix.hpp"
 
 using namespace mlib;
