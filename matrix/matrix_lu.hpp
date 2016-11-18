@@ -64,7 +64,7 @@ begin:
   }
   if (inputMatrixSwapped)
   {
-    swap_rows(L,1,2);
+    swap_rows(L,nr1,nr2);
   }
   return std::make_pair(L, U);
 
