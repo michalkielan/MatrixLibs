@@ -27,12 +27,12 @@ namespace mlib
 
 
 template<typename T>
-static void print_num(T&& num)
+static inline void print_num(T&& num)
 {
   std::cout << num << " ";
 }
 
-static void print_endl()
+static inline void print_endl()
 {
   std::cout << std::endl;
 }
@@ -45,12 +45,12 @@ namespace mlib
 
 
 template<typename T>
-static void print_num(T t)
+static inline void print_num(T t)
 {
   // custom print implementation
 }
 
-static void print_endl()
+static inline void print_endl()
 {
   // cunstom print implementation
 }
