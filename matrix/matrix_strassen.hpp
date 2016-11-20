@@ -1,12 +1,19 @@
-/*
- * matrix_strassen.hpp
+/**
+ * @file matrix_strassen.hpp
  *
- *  Created on: Oct 27, 2016
- *      Author: michal
+ * @date Oct 27, 2016
+ *
+ * @author Michal Kielan
+ *
+ * @par Licence
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
  */
 
-#ifndef MATRIX_MATRIX_STRASSEN_HPP_
-#define MATRIX_MATRIX_STRASSEN_HPP_
+#ifndef MATRIX_STRASSEN_HPP_
+#define MATRIX_STRASSEN_HPP_
 
 #include "matrix_type.hpp"
 
@@ -50,4 +57,4 @@ Matrix<T, 2, 2> strassen(const Matrix<T, 2, 2>& A, const Matrix<T, 2, 2>& B)
 } /* namespace mlib */
 
 
-#endif /* MATRIX_MATRIX_STRASSEN_HPP_ */
+#endif /* MATRIX_STRASSEN_HPP_ */

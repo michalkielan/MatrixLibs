@@ -1,8 +1,15 @@
-/*
- * matrix_swap.hpp
+/**
+ * @file matrix_swap.hpp
  *
- *  Created on: Oct 29, 2016
- *      Author: michal
+ * @date Oct 29, 2016
+ *
+ * @author Michal Kielan
+ *
+ * @par Licence
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
  */
 
 #ifndef MATRIX_SWAP_HPP_

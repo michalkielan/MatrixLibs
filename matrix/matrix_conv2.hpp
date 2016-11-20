@@ -1,8 +1,15 @@
-/*
- * matrix_conv2.hpp
+/**
+ * @file matrix_conv2.hpp
  *
- *  Created on: Oct 26, 2016
- *      Author: michal
+ * @date Oct 26, 2016
+ *
+ * @author Jaroslaw Wiosna
+ *
+ * @par Licence
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
  */
 
 #ifndef MATRIX_MATRIX_CONV2_HPP_

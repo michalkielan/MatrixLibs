@@ -1,12 +1,19 @@
-/*
- * matrix_sum.hpp
+/**
+ * @file matrix_sum.hpp
  *
- *  Created on: Oct 27, 2016
- *      Author: michal
+ * @date Oct 26, 2016
+ *
+ * @author Michal Kielan
+ *
+ * @par Licence
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
  */
 
-#ifndef MATRIX_MATRIX_SUM_HPP_
-#define MATRIX_MATRIX_SUM_HPP_
+#ifndef MATRIX_SUM_HPP_
+#define MATRIX_SUM_HPP_
 
 #include "matrix_type.hpp"
 
@@ -124,4 +131,4 @@ Matrix<T, i, j> operator++(const Matrix<T, i, j>& A, int)
 
 } /* namespace mlib */
 
-#endif /* MATRIX_MATRIX_SUM_HPP_ */
+#endif /* MATRIX_SUM_HPP_ */

@@ -1,3 +1,17 @@
+/**
+ * @file matrix_lu.hpp
+ *
+ * @date Oct 26, 2016
+ *
+ * @author Jaroslaw Wiosna
+ *
+ * @par Licence
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ */
+
 #ifndef MATRIX_MATRIX_LU_HPP_
 #define MATRIX_MATRIX_LU_HPP_
 
