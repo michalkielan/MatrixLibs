@@ -20,15 +20,35 @@ namespace mlib
 {
 
 /****
- * \brief DUMMY
+ * \brief Co-occurence matrix
  *
- * \param [in] 
+ * \param Input matrix
  *
- * \return always true 
+ * \return Co-occurence matrix - corelation between two pixel. 
+ * First is the refference. Second is the neighbour on the right side.
+ * Using one pixel offset.
  */
-bool dummy()
+template<typename T,  std::size_t I, std::size_t J>
+Matrix<T, 4, 4> cooccurrence(const Matrix<T, I, J>& A)
 {
-  return true;
+  Matrix<T, 4, 4> result{};
+  for (std::size_t i = 0; i < I; i++)
+  {
+    for (std::size_t j = 0; j < J-1; j++)
+    {
+      for (std::size_t a = 0; a < 4; a++)
+      {
+        for (std::size_t b = 0; b < 4; b++)
+        {
+          if (A[i][j] == a && A[i][j+1] == b)
+          {
+            result[a][b]++;
+          }
+	}
+      }
+    }
+  }
+  return result;
 }
 
 

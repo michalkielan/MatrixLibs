@@ -20,7 +20,7 @@ MatrixLibs is C++11 meta-programming, header-only, no-dynamic memory allocations
 * Histogram
 * Filters: mean, meadina, variance, standard deviation
 * Swap rows, cols
-
+* _Co-occurence matrix_ <-- experimental
 
 ## Usage
 * include matrix.hpp

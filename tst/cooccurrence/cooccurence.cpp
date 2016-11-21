@@ -18,9 +18,21 @@
 
 using namespace mlib;
 
-TEST(MatrixTest, cooccurrenceDummy)
+TEST(MatrixTest, glcm)
 {
-  ASSERT_FALSE(false);
+  const Matrix<float, 4, 4> A =
+  { 0,  0,  1,  1,
+    0,  0,  1,  1,
+    0,  2,  2,  2,
+    2,  2,  3,  3 };
+
+  const Matrix<float, 4, 4> cooccurrenceA =
+  { 2,  2,  1,  0,
+    0,  2,  0,  0,
+    0,  0,  3,  1,
+    0,  0,  0,  1 };
+
+  ASSERT_TRUE(compare(cooccurrence(A), cooccurrenceA, 0.01f));
 }
 
 int main(int argc, char* argv[])
