@@ -27,7 +27,7 @@ option(BUILD_BENCH "Build Benchmark" ON)
 option(ENABLE_LTO "Enable LTO" OFF)
 
 set(CMAKE_CXX_STANDARD 11)
-set(COMPILE_FLAGS "-ffast-math -Wall -Wno-missing-braces -lpthread -flto")
+set(COMPILE_FLAGS "-ffast-math -Wall -Wno-missing-braces")
 set(GTEST_FLAGS "-lgtest")
 set(LINK_FLAGS "-lpthread")
 
