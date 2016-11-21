@@ -23,6 +23,7 @@
 #include "matrix_cholesky.hpp"
 #include "matrix_concatenate.hpp"
 #include "matrix_conv2.hpp"
+#include "matrix_cooccurrence.hpp"
 #include "matrix_det.hpp"
 #include "matrix_div.hpp"
 #include "matrix_eye.hpp"
