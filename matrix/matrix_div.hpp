@@ -15,10 +15,28 @@
 #ifndef MATRIX_MATRIX_DIV_HPP_
 #define MATRIX_MATRIX_DIV_HPP_
 
-#include "matrix_type.hpp"
+#include "matrix_inv.hpp"
+
 
 namespace mlib
 {
+
+
+/**
+ * @brief Division matrix and matrix
+ *
+ * Usage: If sizes of matrix A and B are illegal to division,
+ *        the function will not compile
+ * @param [in] Matrix A with n, m size
+ * @param [in] Matrix B with m, p size
+ *
+ * @return Result of sum each element of A matrix and scalar data
+ */
+template<typename T,  std::size_t n, std::size_t m, std::size_t p>
+static Matrix<T, n, p> div(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
+{
+  return A * inv(B);
+}
 
 
  /**
@@ -45,6 +63,23 @@ static Matrix<T, n, m> div(const Matrix<T, n, m>& A, const T scalar)
     }
   }
   return prod;
+}
+
+
+/**
+ * @brief Overloaded '/' operator for divide matrix and matrix
+ *
+ * Usage: If sizes of matrix A and B are illegal to division,
+ *        the function will not compile
+ * @param [in] Matrix A with n, m size
+ * @param [in] Matrix B with m, p size
+ *
+ * @return Result of sum each element of A matrix and scalar data
+ */
+template<typename T,  std::size_t n, std::size_t m, std::size_t p>
+Matrix<T, n, p> operator/(const Matrix<T, n, m>& A, const Matrix<T, m, p>& B)
+{
+  return div(A, B);
 }
 
 
