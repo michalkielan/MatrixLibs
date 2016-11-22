@@ -15,6 +15,7 @@
 #ifndef MATRIX_MATRIX_INV_HPP_
 #define MATRIX_MATRIX_INV_HPP_
 
+#include "matrix_div.hpp"
 #include "matrix_det.hpp"
 #include "matrix_trans.hpp"
 
