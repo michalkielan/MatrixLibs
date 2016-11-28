@@ -27,9 +27,13 @@ option(BUILD_BENCH "Build Benchmark" ON)
 option(ENABLE_LTO "Enable LTO" OFF)
 
 set(CMAKE_CXX_STANDARD 11)
-set(COMPILE_FLAGS "-ffast-math -Wall -Wno-missing-braces")
+set(COMPILE_FLAGS "-Wall -Wno-missing-braces")
 set(GTEST_FLAGS "-lgtest")
 set(LINK_FLAGS "-lpthread")
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  set(COMPILE_FLAGS  "${COMPILE_FLAGS} -stdlib=libstdc++")
+endif()
 
 if(BUILD_TESTS)
   set(LINK_FLAGS "${LINK_FLAGS} ${GTEST_FLAGS}")
