@@ -139,8 +139,8 @@ Matrix<T, i+2, j+2> conv2_full(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& 
 template<typename T, std::size_t i, std::size_t j>
 Matrix<T, i-2, j-2> conv2_valid(const Matrix<T, i, j>& A, const Matrix<T, 3, 3>& kernel)
 {
-  auto tmp1 = getminor(conv2(A,kernel),i,j); // conv2 means conv2 with -same option
-  return getminor(tmp1,0,0);
+  Matrix<T, i-1, i-1> tmp1 = getminor(conv2(A,kernel),i-1,j-1); // conv2 means conv2 with -same option
+  return getminor(tmp1,0,0); // conv2 means conv2 with -same option
 }
 
 
