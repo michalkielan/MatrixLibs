@@ -36,7 +36,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 endif()
 
 if(BUILD_TESTS)
-  set(LINK_FLAGS "${LINK_FLAGS} ${GTEST_FLAGS}")
+  set(LINK_FLAGS "${GTEST_FLAGS} ${LINK_FLAGS}")
 endif()
 
 
