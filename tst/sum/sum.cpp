@@ -41,6 +41,22 @@ TEST(MatrixTest, sum)
   { 2, 3,
     1, 2 };
   ASSERT_TRUE(compare(sum2,expected2,0.0001f));
+  
+    const Matrix<float, 2, 2> C =
+  { 41, 22,
+    40, 21 };
+ 
+  const Matrix<float, 2, 2> D =
+  {  6, 0,
+     1, 0 };
+ 
+  auto sumCD = C + D;
+ 
+  Matrix<float, 2, 2> resCD =
+  { 47, 22,
+    41, 21 };
+ 
+  ASSERT_EQ(sumCD, resCD);
 }
 
 TEST(MatrixTest, sum_scalar)
